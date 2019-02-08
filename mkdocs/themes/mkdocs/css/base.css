@@ -333,8 +333,3 @@ h1:hover .headerlink, h2:hover .headerlink, h3:hover .headerlink, h4:hover .head
     top: 50px;
     left: 35%;
 }
-
-/* Hide stackedit right button */
-.navigation-bar__inner--right {
-    display: none !important;
-}

@@ -18,22 +18,35 @@ def _get_handler(site_dir, RequestHandler):
 
     class WebHandler(RequestHandler):
         def parse_url_path(self, url_path):
+            """
+            Return real file path.
+            """
             markdown_pattern = r'.*.md$'
             if re.match(markdown_pattern, url_path):
-                markdown_file = os.path.join(site_dir, 'markdown', url_path)
-                return markdown_file
+                markdown_file_path = os.path.join(site_dir, 'markdown', url_path)
+                return markdown_file_path
             else:
-                static_file = os.path.join(site_dir, url_path)
-                return static_file
+                static_file_path = os.path.join(site_dir, url_path)
+                return static_file_path
 
-        # def put(self):
-        #     self.set_header('Content-Type', 'text/markdown')
-        #     path = self.get_argument('path', default=None)
-        #     if path:
-        #         markdown_file = os.path.join(site_dir, 'markdown', path)
-        #         print(dir(self.request.files))
-        #     else:
-        #         self.write_error(404)            
+        def put(self, url_path):
+            """
+            Update markdown file.
+            """
+            markdown_pattern = r'.*.md$'
+            if re.match(markdown_pattern, url_path):
+                if self.request.files:
+                    file_obj = self.request.files.get('markdown')
+                    file_content = file_obj[0].get('body')
+                    file_path = os.path.join(site_dir, 'markdown', url_path)
+                    if os.path.isfile(file_path) and file_content:
+                        with open(file_path, 'wb') as f:
+                            f.write(file_content)
+                    else:
+                        self.write_error(400)
+                self.write('update successfully.')
+            else:
+                self.write_error(405)  # 405 method not allowed web services
 
         def write_error(self, status_code, **kwargs):
 

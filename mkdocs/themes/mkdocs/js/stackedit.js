@@ -30,16 +30,40 @@ function baseName(str)
     return base;
 }
 
-function getMarkdownContent(pathName, callback) {
+function getMarkdownUrl() {
     var host = window.location.host
     var protocol = window.location.protocol
     var baseURL = protocol + '//' + host
-    var markdownURL = baseURL + pathName
+    var markdownURL = baseURL + getMarkdownPath()
+    return markdownURL
+}
+
+function getMarkdownContent(pathName, callback) {
+    var markdownURL = getMarkdownUrl()
     // var markdownURL = 'http://kancloud.nordata.cn/2019-02-07-license.md'
     $.get(markdownURL, function(result){
         console.log(result)
         Loading.close();
         callback(baseName(pathName), result)
+    });
+}
+
+function confirmSave(markdownStr, successAction, failAction) {
+    $.confirm({  
+        'title': 'Save Confirmation',  
+        'content': 'Do you want to save these changes?',  
+        'buttons': {  
+            'Yes': {  
+                'class': 'blue',  
+                'action': function() {
+                    successAction(markdownStr);
+                }, 
+            },  
+            'No': {  
+                'class': 'gray',  
+                'action': failAction
+            }  
+        }  
     });
 }
 
@@ -53,11 +77,39 @@ function openStackedit(fileName, content) {
         },
     })
 
-    stackedit.on('close', (file) => {
-
+    stackedit.on('close', () => {
+        var markdownStr = window.sessionStorage.getItem(getMarkdownPath())
+        confirmSave(
+            markdownStr, 
+            function(markdownStr){
+                var markdownBlob = new Blob([markdownStr], {
+                    type: 'text/plain'
+                });
+                var formData = new FormData();                
+                formData.append('markdown', markdownBlob);
+                if (markdownStr) {
+                    $.ajax({
+                        type: 'PUT',
+                        url: getMarkdownUrl(),
+                        data: formData,
+                        processData: false,
+                        contentType: false
+                    }).done(function () {
+                        console.log('SUCCESS');
+                    }).fail(function (msg) {
+                        console.log(msg);
+                    });
+                }
+            },
+            function() {
+                console.log('Cancel')
+            }
+        )
     })
 
     stackedit.on('fileChange', (file) => {
+        var markdownStr = file.content.text
+        window.sessionStorage.setItem(getMarkdownPath(), markdownStr)
         $('#notify-btn').notify(
             "File will be saved when you close the editor.", 
             "info",
