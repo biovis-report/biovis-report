@@ -1,0 +1,6 @@
+include README.md
+include LICENSE
+recursive-include mkdocs *.ico *.js *.css *.png *.html *.eot *.svg *.ttf *.woff *.woff2 *.xml *.mustache *mkdocs_theme.yml
+recursive-include stackedit-app
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
