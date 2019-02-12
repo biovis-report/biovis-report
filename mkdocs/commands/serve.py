@@ -83,7 +83,6 @@ def _livereload(host, port, config, builder, site_dir):
     # We are importing here for anyone that has issues with livereload. Even if
     # this fails, the --no-livereload alternative should still work.
     import os
-    import shutil
     from livereload import Server
     from livereload.handlers import StaticFileHandler
 
@@ -98,7 +97,12 @@ def _livereload(host, port, config, builder, site_dir):
 
     # ln -s <docs_dir> <site_dir>/markdown, for editing markdown file.
     # docs_dir is not root directory, so we need to link it to site_dir.
-    os.symlink(config['docs_dir'], os.path.join(site_dir, 'markdown'))
+    markdown_link = os.path.join(site_dir, 'markdown')
+    docs_dir = config['docs_dir']
+    if os.path.realpath(markdown_link) == docs_dir:
+        pass
+    else:
+        os.symlink(docs_dir, markdown_link)
 
     # Watch the documentation files, the config file and the theme files.
     server.watch(config['docs_dir'], builder)
@@ -137,7 +141,7 @@ def _static_server(host, port, site_dir):
 
 
 def serve(config_file=None, dev_addr=None, strict=None, theme=None,
-          theme_dir=None, livereload='livereload'):
+          theme_dir=None, livereload='livereload', site_dir=None):
     """
     Start the MkDocs development server
 
@@ -146,10 +150,11 @@ def serve(config_file=None, dev_addr=None, strict=None, theme=None,
     whenever a file is edited.
     """
 
-    # Create a temporary build directory, and set some options to serve it
-    # PY2 returns a byte string by default. The Unicode prefix ensures a Unicode
-    # string is returned. And it makes MkDocs temp dirs easier to identify.
-    site_dir = tempfile.mkdtemp(prefix='mkdocs_')
+    if site_dir is None:
+        # Create a temporary build directory, and set some options to serve it
+        # PY2 returns a byte string by default. The Unicode prefix ensures a Unicode
+        # string is returned. And it makes MkDocs temp dirs easier to identify.
+        site_dir = tempfile.mkdtemp(prefix='mkdocs_')
 
     def builder():
         log.info("Building documentation...")
