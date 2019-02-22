@@ -95,6 +95,10 @@ function openStackedit(fileName, content) {
                         processData: false,
                         contentType: false
                     }).done(function () {
+                        Loading.open({
+                            theme: 'sk-circle',
+                            message: "<h4 class=''>" + "Rendering Your Markdown..." +  " </h4> "
+                        });
                         console.log('SUCCESS');
                     }).fail(function (msg) {
                         console.log(msg);

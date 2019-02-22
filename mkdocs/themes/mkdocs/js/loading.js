@@ -1,3 +1,7 @@
+/* 
+    REDEME: https://www.jqueryscript.net/loading/Fullscreen-Loading-Indicators-with-jQuery-CSS3-HoldOn-js.html
+    Fullscreen Loading Indicators with jQuery and CSS3 - HoldOn.js
+*/
 (function(window){'use strict';
     
     function LoadingAction(){

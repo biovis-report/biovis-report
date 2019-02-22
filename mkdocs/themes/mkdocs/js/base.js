@@ -214,3 +214,13 @@ var keyCodes = {
   221: '&rsqb;',
   222: '&apos;',
 };
+
+$(function() {
+    // Side nav expansion
+    $('#side-nav-handle').click(function(e){
+        $('.mainpage, .side-nav, .footer').toggleClass('hidden-nav');
+        $('#side-nav-handle span').toggleClass('fa-caret-left fa-caret-right');
+        // send resize trigger for replotting after css animation
+        setTimeout(function(){ $(document).resize(); }, 510);
+    });
+});
