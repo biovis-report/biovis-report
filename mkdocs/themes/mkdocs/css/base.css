@@ -1,5 +1,6 @@
 body {
     padding-top: 70px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 /* Replacement for `body { background-attachment: fixed; }`, which has
@@ -130,17 +131,13 @@ blockquote {
 
 h1 {
     color: #444;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 42px;
 }
 
 h2, h3, h4, h5, h6 {
     color: #444;
-    font-weight: 300;
-}
-
-hr {
-    border-top: 1px solid #aaa;
+    font-weight: 500;
 }
 
 pre, .rst-content tt {
@@ -437,7 +434,7 @@ h1:hover .headerlink, h2:hover .headerlink, h3:hover .headerlink, h4:hover .head
     justify-content: center;
     align-items: center;
     margin: 10px auto;
-    border: 1px solid #dedede;
+    /* border: 1px solid #dedede; */
     border-radius: 5px;
     padding: 20px;
 }
@@ -450,4 +447,11 @@ h1:hover .headerlink, h2:hover .headerlink, h3:hover .headerlink, h4:hover .head
 
 .side-nav-wrapper .navbar-header {
     background: #fff;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
 }

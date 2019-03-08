@@ -70,6 +70,12 @@
       {%- endblock %}
 
       {%- block extrahead %} {% endblock %}
+      <script type="text/javascript" src="http://kancloud.nordata.cn/2019-02-27-iframeResizer.min.js"></script>
+      <style>
+        iframe {
+          min-width: 100%;
+        }
+      </style>
     </head>
 
     <body{% if page and page.is_homepage %} class="homepage"{% endif %}>

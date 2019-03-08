@@ -125,7 +125,7 @@ def serve_command(dev_addr, config_file, strict, theme, theme_dir, livereload):
     strict = strict or None
 
     try:
-        serve.serve(
+        serve.dev_serve(
             config_file=config_file,
             dev_addr=dev_addr,
             strict=strict,

@@ -140,8 +140,8 @@ def _static_server(host, port, site_dir):
         log.info('Stopping server...')
 
 
-def serve(config_file=None, dev_addr=None, strict=None, theme=None,
-          theme_dir=None, livereload='livereload', site_dir=None):
+def dev_serve(config_file=None, dev_addr=None, strict=None, theme=None,
+              theme_dir=None, livereload='livereload', site_dir=None):
     """
     Start the MkDocs development server
 
