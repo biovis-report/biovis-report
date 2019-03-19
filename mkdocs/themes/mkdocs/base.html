@@ -189,10 +189,10 @@
             <div id="notify-btn"></div>
             {%- block content %}
                 <div class="side-nav-wrapper">
-                    <div class="side-nav">{% include "toc.html" %}</div>
-                    <div id="side-nav-handle"><span class="fa fa-caret-left" aria-hidden="true"></span></div>
+                    <div class="side-nav hidden-nav">{% include "toc.html" %}</div>
+                    <div id="side-nav-handle"><span class="fa fa-caret-right" aria-hidden="true"></span></div>
                 </div>
-                <div class="mainpage" role="main">
+                <div class="mainpage hidden-nav" role="main">
                     {% if config.editable  %}
                     <div class="btn-menu">
                         <button type="button" class="btn btn-link" id="edit-btn">Edit</button>
@@ -201,13 +201,13 @@
                     {% include "content.html" %}
                 </div>
             {%- endblock %}
-            <footer class="footer">
+            <footer class="footer hidden-nav">
                 {%- block footer %}
                   <hr>
                   {%- if config.copyright %}
                       <p>{{ config.copyright }}</p>
                   {%- endif %}
-                  <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+                  <p>Documentation built with <a href="http://choppy.3steps.cn/">Choppy MkDocs (Based on MkDocs)</a>.</p>
                 {%- endblock %}
               </footer>
         </div>

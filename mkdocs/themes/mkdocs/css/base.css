@@ -19,10 +19,15 @@ body::before {
 body > .container {
     min-height: 400px;
     max-width: 100%;
+    padding: 0px 50px;
 }
 
 ul.nav .main {
     font-weight: bold;
+}
+
+li.nav-item:not(.main) {
+    padding-left: 5px;
 }
 
 .source-links {
@@ -133,11 +138,24 @@ h1 {
     color: #444;
     font-weight: 500;
     font-size: 42px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 h2, h3, h4, h5, h6 {
     color: #444;
     font-weight: 500;
+}
+
+p {
+    font-size: 18px;
+    text-align: justify;
+    text-align-last: left;
+}
+
+.footer p {
+    text-align: center;
+    text-align-last: center;
 }
 
 pre, .rst-content tt {
@@ -186,6 +204,15 @@ pre code {
     word-wrap: normal;
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     font-size: 12px;
+}
+
+.alert {
+    padding: 0rem;
+}
+
+.alert pre {
+    background: transparent;
+    border: none;    
 }
 
 kbd {
