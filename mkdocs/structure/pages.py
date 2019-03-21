@@ -186,6 +186,21 @@ class Page(object):
         self.content = md.convert(self.markdown)
         self.toc = get_toc(getattr(md, 'toc', ''))
 
+    def render_ppt(self, config, files, regex_sep=r'\<hr[ \/]+\>'):
+        """
+        Set raw markdown as page content
+        """
+        import re
+        extensions = ['mk_media_extension']
+        md = markdown.Markdown(
+            extensions=extensions,
+            extension_configs=config['mdx_configs'] or {}
+        )
+        content = md.convert(self.markdown)
+        self.content = content
+        self.content_lst = re.split(regex_sep, content)
+        self.toc = get_toc(getattr(md, 'toc', ''))
+
 
 class _RelativePathTreeprocessor(Treeprocessor):
     def __init__(self, file, files):

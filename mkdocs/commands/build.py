@@ -153,7 +153,7 @@ def _build_extra_template(template_name, files, config, nav):
         log.info("Template skipped: '{}' generated empty output.".format(template_name))
 
 
-def _populate_page(page, config, files, dirty=False):
+def _populate_page(page, config, files, dirty=False, templ_type='html'):
     """ Read page content from docs_dir and render Markdown. """
 
     try:
@@ -174,12 +174,21 @@ def _populate_page(page, config, files, dirty=False):
             'page_markdown', page.markdown, page=page, config=config, files=files
         )
 
-        page.render(config, files)
+        if templ_type != 'ppt':
+            # render method will render markdown file to HTML
+            page.render(config, files)
 
-        # Run `page_content` plugin events.
-        page.content = config['plugins'].run_event(
-            'page_content', page.content, page=page, config=config, files=files
-        )
+            # The `page_content` event is called after the Markdown text is rendered to
+            # HTML (but before being passed to a template) and can be used to alter the
+            # HTML body of the page.
+            # Run `page_content` plugin events.
+            page.content = config['plugins'].run_event(
+                'page_content', page.content, page=page, config=config, files=files
+            )
+        elif templ_type == 'ppt':
+            page.render_ppt(config, files)
+            # TODO: may be you need to alter the Markdown/HTML source text
+            pass
     except Exception as e:
         log.error("Error reading page '{}': {}".format(page.file.src_path, e))
         raise
@@ -233,7 +242,7 @@ def _build_page(page, config, files, nav, env, dirty=False):
         raise
 
 
-def build(config, live_server=False, dirty=False):
+def build(config, live_server=False, dirty=False, templ_type='html'):
     """ Perform a full site build. """
     from time import time
     start = time()
@@ -274,7 +283,7 @@ def build(config, live_server=False, dirty=False):
     log.debug("Reading markdown pages.")
     for file in files.documentation_pages():
         log.debug("Reading: " + file.src_path)
-        _populate_page(file.page, config, files, dirty)
+        _populate_page(file.page, config, files, dirty, templ_type=templ_type)
 
     # Run `env` plugin events.
     env = config['plugins'].run_event(

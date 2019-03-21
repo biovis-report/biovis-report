@@ -141,7 +141,8 @@ def _static_server(host, port, site_dir):
 
 
 def dev_serve(config_file=None, dev_addr=None, strict=None, theme=None,
-              theme_dir=None, livereload='livereload', site_dir=None):
+              theme_dir=None, livereload='livereload', site_dir=None,
+              templ_type='html'):
     """
     Start the MkDocs development server
 
@@ -171,7 +172,7 @@ def dev_serve(config_file=None, dev_addr=None, strict=None, theme=None,
 
         live_server = livereload in ['dirty', 'livereload']
         dirty = livereload == 'dirty'
-        build(config, live_server=live_server, dirty=dirty)
+        build(config, live_server=live_server, dirty=dirty, templ_type=templ_type)
         return config
 
     try:

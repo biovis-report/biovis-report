@@ -1,0 +1,8 @@
+# Config options for 'ppt' theme
+
+include_search_page: false
+search_index_only: false
+
+highlightjs: false
+hljs_languages: []
+hljs_style: github

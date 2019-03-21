@@ -111,11 +111,13 @@ def cli():
 @click.option('-s', '--strict', is_flag=True, help=strict_help)
 @click.option('-t', '--theme', type=click.Choice(theme_choices), help=theme_help)
 @click.option('-e', '--theme-dir', type=click.Path(), help=theme_dir_help)
+@click.option('-d', '--site-dir', type=click.Path(), help=site_dir_help)
 @click.option('--livereload', 'livereload', flag_value='livereload', help=reload_help, default=True)
 @click.option('--no-livereload', 'livereload', flag_value='no-livereload', help=no_reload_help)
 @click.option('--dirtyreload', 'livereload', flag_value='dirty', help=dirty_reload_help)
+@click.option('-m', '--templ_type', type=click.Choice(('html', 'ppt')), help="Build markdown as html or ppt")
 @common_options
-def serve_command(dev_addr, config_file, strict, theme, theme_dir, livereload):
+def serve_command(dev_addr, config_file, strict, theme, theme_dir, site_dir, livereload, templ_type):
     """Run the builtin development server"""
 
     logging.getLogger('tornado').setLevel(logging.WARNING)
@@ -131,7 +133,9 @@ def serve_command(dev_addr, config_file, strict, theme, theme_dir, livereload):
             strict=strict,
             theme=theme,
             theme_dir=theme_dir,
-            livereload=livereload
+            livereload=livereload,
+            templ_type=templ_type,
+            site_dir=site_dir,
         )
     except (exceptions.ConfigurationError, socket.error) as e:  # pragma: no cover
         # Avoid ugly, unhelpful traceback
@@ -145,8 +149,9 @@ def serve_command(dev_addr, config_file, strict, theme, theme_dir, livereload):
 @click.option('-t', '--theme', type=click.Choice(theme_choices), help=theme_help)
 @click.option('-e', '--theme-dir', type=click.Path(), help=theme_dir_help)
 @click.option('-d', '--site-dir', type=click.Path(), help=site_dir_help)
+@click.option('-m', '--templ_type', type=click.Choice(('html', 'ppt')), help="Build markdown as html or ppt")
 @common_options
-def build_command(clean, config_file, strict, theme, theme_dir, site_dir):
+def build_command(clean, config_file, strict, theme, theme_dir, site_dir, templ_type):
     """Build the MkDocs documentation"""
 
     # Don't override config value if user did not specify --strict flag
@@ -160,7 +165,7 @@ def build_command(clean, config_file, strict, theme, theme_dir, site_dir):
             theme=theme,
             theme_dir=theme_dir,
             site_dir=site_dir
-        ), dirty=not clean)
+        ), dirty=not clean, templ_type=templ_type)
     except exceptions.ConfigurationError as e:  # pragma: no cover
         # Avoid ugly, unhelpful traceback
         raise SystemExit('\n' + str(e))

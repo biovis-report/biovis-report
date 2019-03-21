@@ -70,8 +70,9 @@ setup(
             'mkdocs = mkdocs.__main__:cli',
         ],
         'mkdocs.themes': [
-            'mkdocs = mkdocs.themes.mkdocs',
-            'readthedocs = mkdocs.themes.readthedocs',
+            'mkdocs = mkdocs.themes.html_mkdocs',
+            'readthedocs = mkdocs.themes.html_readthedocs',
+            'white_ppt = mkdocs.themes.white_ppt',
         ],
         'mkdocs.plugins': [
             'search = mkdocs.contrib.search:SearchPlugin',
