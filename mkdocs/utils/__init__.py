@@ -330,7 +330,7 @@ def dirname_to_title(dirname):
 
 
 def get_markdown_title(markdown_src):
-        """
+        """ # noqa
         Get the title of a Markdown document. The title in this case is considered
         to be a H1 that occurs before any other content in the document.
         The procedure is then to iterate through the lines, stopping at the first
