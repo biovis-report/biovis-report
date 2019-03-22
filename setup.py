@@ -70,13 +70,15 @@ setup(
             'mkdocs = mkdocs.__main__:cli',
         ],
         'mkdocs.themes': [
-            # 'pgx_mkdocs = mkdocs.themes.choppy_mkdocs',
-            # 'pgx_rtd = mkdocs.themes.choppy_readthedocs',
-            # 'white_ppt = mkdocs.themes.white_ppt',
+            'pgx_mkdocs = mkdocs.themes.choppy_mkdocs',
+            'pgx_rtd = mkdocs.themes.choppy_readthedocs',
+            'white_ppt = mkdocs.themes.white_ppt',
             'mkdocs = mkdocs.themes.mkdocs',
+            'docskimmer = mkdocs.themes.mkdocs_docskimmer',
         ],
         'mkdocs.plugins': [
             'search = mkdocs.contrib.search:SearchPlugin',
+            'header_injector = mkdocs.contrib.header_injector:HeaderInjectorPlugin'
         ],
     },
     classifiers=[
