@@ -283,6 +283,9 @@ def build(config, live_server=False, dirty=False, templ_type='html'):
     log.debug("Reading markdown pages.")
     for file in files.documentation_pages():
         log.debug("Reading: " + file.src_path)
+        # Set markdown file path for other plugins/extensions.
+        docs_dir = config['docs_dir']
+        os.environ['CHOPPY_CURRENT_FILE_PATH'] = os.path.join(docs_dir, file.src_path)
         _populate_page(file.page, config, files, dirty, templ_type=templ_type)
 
     # Run `env` plugin events.

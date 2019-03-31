@@ -1,5 +1,5 @@
 # {% set data = load_setup_py_data() %}
-{% set version = '1.1.dev0' %}
+{% set version = '1.1.dev1' %}
 {% set url = 'http://choppy.3steps.cn' %}
 {% set description = 'Project documentation with Markdown.' %}
 
