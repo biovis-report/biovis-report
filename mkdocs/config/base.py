@@ -63,6 +63,7 @@ class Config(utils.UserDict):
                 warnings.extend([(key, w) for w in config_option.warnings])
                 config_option.reset_warnings()
             except ValidationError as e:
+                log.debug("Config Validate: Key %s, Error: %s" % (key, str(e)))
                 failed.append((key, e))
 
         for key in (set(self.keys()) - self._schema_keys):
@@ -82,6 +83,7 @@ class Config(utils.UserDict):
                 warnings.extend([(key, w) for w in config_option.warnings])
                 config_option.reset_warnings()
             except ValidationError as e:
+                log.debug("Config Validate: Key %s, Error: %s" % (key, str(e)))
                 failed.append((key, e))
 
         return failed, warnings
@@ -96,6 +98,7 @@ class Config(utils.UserDict):
                 warnings.extend([(key, w) for w in config_option.warnings])
                 config_option.reset_warnings()
             except ValidationError as e:
+                log.debug("Config Validate: Key %s, Error: %s" % (key, str(e)))
                 failed.append((key, e))
 
         return failed, warnings

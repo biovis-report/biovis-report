@@ -62,7 +62,8 @@ setup(
         'lunr[languages]>=0.5.2',
         'Markdown>=2.3.1',
         'PyYAML>=3.10',
-        'tornado>=5.0'
+        'tornado>=5.0',
+        'beautifulsoup4'
     ],
     python_requires='!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*',
     entry_points={

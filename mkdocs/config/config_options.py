@@ -2,11 +2,14 @@ from __future__ import unicode_literals
 
 import os
 import sys
+import logging
 from collections import Sequence, namedtuple
 import markdown
 
 from mkdocs import utils, theme, plugins
 from mkdocs.config.base import Config, ValidationError
+
+logger = logging.getLogger(__name__)
 
 
 class BaseConfigOption(object):
@@ -554,6 +557,7 @@ class MarkdownExtensions(OptionallyRequired):
         try:
             markdown.Markdown(extensions=extensions, extension_configs=self.configdata)
         except Exception as e:
+            logger.debug("Markdown Extension Validate: %s" % str(e))
             raise ValidationError(e.args[0])
 
         return extensions

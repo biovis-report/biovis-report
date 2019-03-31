@@ -5,3 +5,4 @@ lunr[languages]>=0.5.2
 Markdown>=2.3.1
 PyYAML>=3.10
 tornado>=5.0
+beautifulsoup4
