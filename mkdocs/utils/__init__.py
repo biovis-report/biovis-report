@@ -288,34 +288,37 @@ def get_theme_dir(name):
     return os.path.dirname(os.path.abspath(theme.load().__file__))
 
 
-def get_themes():
+def get_themes(dist='choppy-report'):
     """ Return a dict of all installed themes as (name, entry point) pairs. """
 
     themes = {}
-    builtins = pkg_resources.get_entry_map(dist='mkdocs', group='mkdocs.themes')
+    try:
+        builtins = pkg_resources.get_entry_map(dist=dist, group='mkdocs.themes')
 
-    for theme in pkg_resources.iter_entry_points(group='mkdocs.themes'):
+        for theme in pkg_resources.iter_entry_points(group='mkdocs.themes'):
 
-        if theme.name in builtins and theme.dist.key != 'mkdocs':
-            raise exceptions.ConfigurationError(
-                "The theme {0} is a builtin theme but {1} provides a theme "
-                "with the same name".format(theme.name, theme.dist.key))
+            if theme.name in builtins and theme.dist.key != dist:
+                raise exceptions.ConfigurationError(
+                    "The theme {0} is a builtin theme but {1} provides a theme "
+                    "with the same name".format(theme.name, theme.dist.key))
 
-        elif theme.name in themes:
-            multiple_packages = [themes[theme.name].dist.key, theme.dist.key]
-            log.warning("The theme %s is provided by the Python packages "
-                        "'%s'. The one in %s will be used.",
-                        theme.name, ','.join(multiple_packages), theme.dist.key)
+            elif theme.name in themes:
+                multiple_packages = [themes[theme.name].dist.key, theme.dist.key]
+                log.warning("The theme %s is provided by the Python packages "
+                            "'%s'. The one in %s will be used.",
+                            theme.name, ','.join(multiple_packages), theme.dist.key)
 
-        themes[theme.name] = theme
+            themes[theme.name] = theme
+    except pkg_resources.DistributionNotFound:
+        pass
 
     return themes
 
 
-def get_theme_names():
+def get_theme_names(dist='choppy-report'):
     """Return a list of all installed themes by name."""
 
-    return get_themes().keys()
+    return get_themes(dist).keys()
 
 
 def dirname_to_title(dirname):
@@ -330,22 +333,22 @@ def dirname_to_title(dirname):
 
 
 def get_markdown_title(markdown_src):
-        """ # noqa
-        Get the title of a Markdown document. The title in this case is considered
-        to be a H1 that occurs before any other content in the document.
-        The procedure is then to iterate through the lines, stopping at the first
-        non-whitespace content. If it is a title, return that, otherwise return
-        None.
-        """
+    """ # noqa
+    Get the title of a Markdown document. The title in this case is considered
+    to be a H1 that occurs before any other content in the document.
+    The procedure is then to iterate through the lines, stopping at the first
+    non-whitespace content. If it is a title, return that, otherwise return
+    None.
+    """
 
-        lines = markdown_src.replace('\r\n', '\n').replace('\r', '\n').split('\n')
-        while lines:
-            line = lines.pop(0).strip()
-            if not line.strip():
-                continue
-            if not line.startswith('# '):
-                return
-            return line.lstrip('# ')
+    lines = markdown_src.replace('\r\n', '\n').replace('\r', '\n').split('\n')
+    while lines:
+        line = lines.pop(0).strip()
+        if not line.strip():
+            continue
+        if not line.startswith('# '):
+            return
+        return line.lstrip('# ')
 
 
 def find_or_create_node(branch, key):

@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "repo_url": { "type": "string" },
+        "site_description": { "type": "string" },
+        "site_author": { "type": "string" },
+        "copyright": { "type": "string" },
+        "site_name": { "type": "string" },
+        "theme_name": { "type": "string" }
+    },
+    "additionalProperties": false,
+    "required": [
+        "repo_url",
+        "site_description",
+        "site_author",
+        "copyright",
+        "site_name",
+        "theme_name"
+    ]
+}

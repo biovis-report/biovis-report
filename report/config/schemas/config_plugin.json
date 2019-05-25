@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "protocol": { "type": "string", "enum": ["http", "https"] },
+        "domain": { "type": "string" },
+        "enable_iframe": { "type": "boolean" },
+        "wait_server_seconds": { "type": "integer", "minimum": 0 },
+        "backoff_factor": { "type": "integer", "minimum": 0 }
+    },
+    "additionalProperties": false,
+    "required": [
+        "protocol",
+        "domain",
+        "enable_iframe",
+        "wait_server_seconds",
+        "backoff_factor"
+    ]
+}

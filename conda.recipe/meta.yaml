@@ -46,9 +46,9 @@ test:
 
 about:
   home: {{ url }}
-  license: BSD 3-Clause
+  license: Custom
   license_file: LICENSE
-  license_family: BSD
+  license_family: Custom
 
   summary: {{ description }}
   description: 'Project documentation with Markdown.'

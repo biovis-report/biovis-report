@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+# PYTHON_ARGCOMPLETE_OK
+"""
+Choppy report is a tool for generating an interactive report.
+"""
+
+from __future__ import unicode_literals
+import sys
+from os.path import abspath, dirname
+
+choppy_dir = dirname(dirname(abspath(__file__)))
+sys.path.insert(0, choppy_dir)
+
+from report.__main__ import main  # noqa
+
+if __name__ == "__main__":
+    sys.exit(main())

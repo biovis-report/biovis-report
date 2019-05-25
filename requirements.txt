@@ -6,3 +6,6 @@ Markdown>=2.3.1
 PyYAML>=3.10
 tornado>=5.0
 beautifulsoup4
+toml>=0.10.0
+Jinja2>=2.10
+verboselogs>=1.7

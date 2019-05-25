@@ -1,0 +1,14 @@
+[plugin]
+protocol = "http"
+domain = "127.0.0.1"
+enable_iframe = true
+wait_server_seconds = 5
+backoff_factor = 3
+
+[report]
+repo_url = "http://choppy.3steps.cn"
+site_description = "Choppy is a painless reproducibility manager."
+site_author = "choppy"
+copyright = " "
+site_name = "Choppy Report"
+theme_name = "mkdocs"
