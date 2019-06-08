@@ -35,6 +35,11 @@ requirements:
     - PyYAML
     - tornado
     - beautifulsoup4
+    - psutil
+    - coloredlogs
+    - argcomplete
+    - toml
+    - pymdown-extensions
 
 test:
   commands:

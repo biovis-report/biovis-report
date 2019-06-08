@@ -9,3 +9,8 @@ beautifulsoup4
 toml>=0.10.0
 Jinja2>=2.10
 verboselogs>=1.7
+psutil
+coloredlogs
+argcomplete
+toml
+pymdown-extensions

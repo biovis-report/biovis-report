@@ -45,7 +45,7 @@ def find_extra_templ_files(template_dir):
     template_files = []
     for root, dirnames, filenames in os.walk(template_dir):
         for filename in filenames:
-            if re.match(r".*.(md|Md|markdown|Markdown|MARKDOWN|MD)$", filename):
+            if re.match(r".*.(md|markdown)$", filename):
                 file_path = join_path(root, filename)
                 # Muse be no prefix in template file path
                 template = file_path.replace(template_dir, "").strip("/")
@@ -224,10 +224,10 @@ class Context:
         for item in extra_files:
             # Use the name of the first level directory as key
             key = item.strip("/").split("/")[0].title()
-            if re.match(r".*.(md|Md|markdown|Markdown|MARKDOWN|MD)$", key):
+            if re.match(r".*.(md|markdown)$", key):
                 key = key.split(".")[0]
 
-            m = re.search(r"(.*).(md|Md|markdown|Markdown|MARKDOWN|MD)$", os.path.basename(item))
+            m = re.search(r"(.*).(md|markdown)$", os.path.basename(item))
             # All files must be match the regex pattern.
             assert m is not None
             basename = m.group(1).title()

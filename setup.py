@@ -64,7 +64,12 @@ setup(
         "PyYAML>=3.10",
         "tornado>=5.0",
         "beautifulsoup4",
-        "Jinja2"
+        "Jinja2",
+        "psutil",
+        "coloredlogs",
+        "argcomplete",
+        "toml",
+        "pymdown-extensions"
     ],
     python_requires="!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*",
     entry_points={
