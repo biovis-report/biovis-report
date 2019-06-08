@@ -1,10 +1,10 @@
 # {% set data = load_setup_py_data() %}
-{% set version = '1.1.dev1' %}
-{% set url = 'http://choppy.3steps.cn' %}
-{% set description = 'Project documentation with Markdown.' %}
+{% set version = '0.3.8.dev0' %}
+{% set url = 'http://choppy.3steps.cn/go-choppy/choppy-report' %}
+{% set description = 'Choppy-report is a tool for generating a scientifically interactive report.' %}
 
 package:
-  name: mkdocs
+  name: choppy-report
   version: {{ version }}
 
 
@@ -15,7 +15,7 @@ source:
 build:
   include_recipe: True
   entry_points:
-    - mkdocs = mkdocs.__main__:cli
+    - choppy-report = report.__main__:main
 
 
 requirements:
@@ -36,21 +36,17 @@ requirements:
     - tornado
     - beautifulsoup4
 
-    # meta-package installs futures for 2.7 but not for 3.x
-    # needed in order to be able to build no-arch conda packages
-    - futures-compat
-
 test:
   commands:
-    - mkdocs -h
+    - choppy-report -h
 
 about:
   home: {{ url }}
-  license: Custom
+  license: AGPL 3.0
   license_file: LICENSE
-  license_family: Custom
+  license_family: GNU
 
   summary: {{ description }}
-  description: 'Project documentation with Markdown.'
+  description: 'Choppy-report is a fast, simple and downright gorgeous interactive report generator that's geared towards building scientific report. Report source files are written in Markdown, and configured with a single TOML configuration file.'
   doc_url: http://docs.3steps.cn
   dev_url: {{ url }}
