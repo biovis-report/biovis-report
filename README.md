@@ -1,39 +1,61 @@
-# MkDocs
+> Author: Jingcheng Yang
+>
+> Email: yjcyxky@163.com
+>
+> Date: 2018-12-13
 
-Project documentation with Markdown.
+# Choppy-report for Scientifically Interactive Report
 
----
+[中文文档](http://docs.3steps.cn)
 
-[![PyPI Version][pypi-v-image]][pypi-v-link]
-[![Build Status][travis-image]][travis-link]
-[![Windows Build Status][appveyor-image]][appveyor-link]
-[![Coverage Status][codecov-image]][codecov-link]
-[![Landscale Code Health][landscape-image]][landscape-link]
+## Introduction
 
-- View the [MkDocs documentation][mkdocs].
-- Project [release notes][release-notes].
-- Visit the [MkDocs wiki](https://github.com/mkdocs/mkdocs/wiki) for community
-  resources, including third party themes and a list of MkDocs users.
-- IRC channel: `#mkdocs` on freenode.
-- Discussions and support: <https://groups.google.com/forum/#!forum/mkdocs>
+Choppy-report is a fast, simple and downright gorgeous interactive report generator that's geared towards building scientific report. Report source files are written in Markdown, and configured with a single TOML configuration file.
 
-## Code of Conduct
+## Dependencies
 
-Everyone interacting in the MkDocs project's codebases, issue trackers, chat
-rooms, and mailing lists is expected to follow the [PyPA Code of Conduct].
+Choppy requires Python 3+ to be loaded in your environment in order for full functionality to work.
 
-[appveyor-image]: https://img.shields.io/appveyor/ci/d0ugal/mkdocs/master.svg
-[appveyor-link]: https://ci.appveyor.com/project/d0ugal/mkdocs
-[codecov-image]: https://codecov.io/github/mkdocs/mkdocs/coverage.svg?branch=master
-[codecov-link]: https://codecov.io/github/mkdocs/mkdocs?branch=master
-[landscape-image]: https://landscape.io/github/mkdocs/mkdocs/master/landscape.svg?style=flat
-[landscape-link]: https://landscape.io/github/mkdocs/mkdocs/master
-[pypi-v-image]: https://img.shields.io/pypi/v/mkdocs.svg
-[pypi-v-link]: https://pypi.org/project/mkdocs/
-[travis-image]: https://img.shields.io/travis/mkdocs/mkdocs/master.svg
-[travis-link]: https://travis-ci.org/mkdocs/mkdocs
+## Installation
 
-[mkdocs]: https://www.mkdocs.org
-[release-notes]: https://www.mkdocs.org/about/release-notes/
+```
+virtualenv .env
+source .env/bin/activate
+pip install choppy-report
 
-[PyPA Code of Conduct]: https://www.pypa.io/en/latest/code-of-conduct/
+# If you want to use a plugin, just need to install it as below.
+conda install plugin_name
+
+# Activate bash auto-complete
+activate-global-python-argcomplete
+eval "$(register-python-argcomplete choppy-report)"
+```
+
+## Usage
+
+Below is choppy-report's basic help text. Choppy-report expects one of three usage modes to
+be indicated as it's first argument: report, manplugin, or plugins.
+
+```
+usage: choppy-report <positional argument> [<args>]
+
+Description: A tool for generating a scientifically interactive report.
+
+positional arguments:
+  {report, manplugin, plugins}
+
+optional arguments:
+  -h, --help            show this help message and exit
+```
+
+## Plugins
+1. [boxplot-r: Interactive boxplot visualization from a Shiny app(r version).](http://docs.3steps.cn/docs/plugins/boxplot-r.html)
+2. [corrplot-r: Interactive correlation plot visualization from a Shiny app(r version).](http://docs.3steps.cn/docs/plugins/corrplot-r.html)
+3. [data-table-js: Another interactive data table. It is based on datatables js library.](http://docs.3steps.cn/docs/plugins/data-table-js.html)
+4. [density-plot: Interactive density plot visualization from a Shiny app(r version).](http://docs.3steps.cn/docs/plugins/density-plot.html)
+5. [group-boxplot: Interactive group-boxplot visualization from a Shiny app(r version).](http://docs.3steps.cn/docs/plugins/group-boxplot.html)
+6. [pivot-table-js: Interactive pivot-table and pivot-chart. It is based on webdatarocks and highcharts.](http://docs.3steps.cn/docs/plugins/pivot-table-js.html)
+7. [rocket-plot-r: Interactive rocket plot visualization from a Shiny app(r version).](http://docs.3steps.cn/docs/plugins/rocket-plot-r.html)
+8. [stack-barplot-r: Interactive stack barplot visualization from a Shiny app(r version).](http://docs.3steps.cn/docs/plugins/stack-barplot-r.html)
+9. [upset-r: Interactive upset plot visualization from a Shiny app(r version).](http://docs.3steps.cn/docs/plugins/upset-r.html)
+10. [violin-plot-r: Interactive violin plot visualization from a Shiny app(r version).](http://docs.3steps.cn/docs/plugins/violin-plot-r.html)

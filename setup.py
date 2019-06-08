@@ -10,10 +10,9 @@ from report.version import get_version as get_report_version
 
 
 long_description = (
-    "MkDocs is a fast, simple and downright gorgeous static site generator "
-    "that's geared towards building project documentation. Documentation "
-    "source files are written in Markdown, and configured with a single YAML "
-    "configuration file."
+    "Choppy-report is a fast, simple and downright gorgeous interactive report generator "
+    "that's geared towards building scientific report. Report source files are written in "
+    "Markdown, and configured with a single TOML configuration file."
 )
 
 
@@ -40,7 +39,7 @@ if sys.argv[-1] == "publish":
     os.system("python setup.py sdist bdist_wheel")
     os.system("twine upload dist/*")
     print("You probably want to also tag the version now:")
-    print("  git tag -a {0} -m 'version {0}'".format(get_version("mkdocs")))
+    print("  git tag -a {0} -m 'version {0}'".format(get_report_version()))
     print("  git push --tags")
     sys.exit()
 
@@ -48,7 +47,7 @@ if sys.argv[-1] == "publish":
 setup(
     name="choppy-report",
     version=get_report_version(),
-    url="https://www.mkdocs.org",
+    url="http://choppy.3steps.cn/go-choppy/choppy-report",
     license="BSD",
     description="Interactive Report with Markdown.",
     long_description=long_description,
@@ -92,8 +91,6 @@ setup(
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
@@ -106,6 +103,3 @@ setup(
     ],
     zip_safe=False,
 )
-
-# (*) Please direct queries to the discussion group:
-#     https://groups.google.com/forum/#!forum/mkdocs

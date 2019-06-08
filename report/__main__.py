@@ -15,7 +15,7 @@ import verboselogs
 from report.version import get_version
 from report.report_mgmt import (get_mode, ReportTheme)
 from report.plugin_utils import (listplugins, get_plugin)
-from report.utils import (get_copyright, is_valid, is_valid_url)
+from report.utils import is_valid, is_valid_url
 
 
 logging.setLoggerClass(verboselogs.VerboseLogger)
@@ -88,7 +88,7 @@ def call_report(args):
 
 
 def call_version(args):
-    print("Choppy %s" % get_version())
+    print("Choppy Report %s" % get_version())
 
 
 description = """Global Management:
@@ -102,7 +102,7 @@ Report Management:
 
 
 parser = argparse.ArgumentParser(
-    description='Description: A tool for executing and monitoring WDLs to Cromwell instances.',
+    description='Description: A tool for generating a scientifically interactive report.',
     usage='choppy <positional argument> [<args>]',
     formatter_class=argparse.RawDescriptionHelpFormatter)
 
