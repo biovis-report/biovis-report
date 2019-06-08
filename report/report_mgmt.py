@@ -45,7 +45,7 @@ def find_extra_templ_files(template_dir):
     template_files = []
     for root, dirnames, filenames in os.walk(template_dir):
         for filename in filenames:
-            if re.match(r".*.md$", filename):
+            if re.match(r".*.(md|Md|markdown|Markdown|MARKDOWN|MD)$", filename):
                 file_path = join_path(root, filename)
                 # Muse be no prefix in template file path
                 template = file_path.replace(template_dir, "").strip("/")
@@ -141,7 +141,8 @@ class Context:
             "site_author": "choppy",
             "copyright": get_copyright(),
             "site_name": "Choppy Report",
-            "theme_name": "mkdocs"
+            "theme_name": "mkdocs",
+            "menu_order": "asc",  # asc or desc
         }
 
         defaults = os.path.join(self.report_dir, 'defaults')
@@ -158,6 +159,8 @@ class Context:
         self.logger.debug("Menu: %s" % self._context["report_menu"])
         self.optimize_menu()
         self.logger.verbose("Optimized Menu: %s\n" % self._context["report_menu"])
+        # Set extra attributes from defaults file, such as copyright, site_name
+        self.set_extra_context(**self.report_context)
 
     @property
     def context(self):
@@ -219,10 +222,16 @@ class Context:
             return keyextractor
 
         for item in extra_files:
+            # Use the name of the first level directory as key
             key = item.strip("/").split("/")[0].title()
-            if re.match(r".*.(md|Md)$", key):
+            if re.match(r".*.(md|Md|markdown|Markdown|MARKDOWN|MD)$", key):
                 key = key.split(".")[0]
-            basename = os.path.basename(item).split(".md")[0].title()
+
+            m = re.search(r"(.*).(md|Md|markdown|Markdown|MARKDOWN|MD)$", os.path.basename(item))
+            # All files must be match the regex pattern.
+            assert m is not None
+            basename = m.group(1).title()
+
             file_path = item.replace(strip_pattern, "").strip("/")
             index = next((index for (index, d) in enumerate(self._context["report_menu"])
                           if d["key"] == key), None)
@@ -232,8 +241,14 @@ class Context:
                     "value": file_path
                 }
                 self._context["report_menu"][index]["value"].append(project_menu)
-                sorted_value_lst = sorted(self._context["report_menu"][index]["value"],
-                                          key=combiner("key", "lower"))
+
+                if self.report_context.get('menu_order').lower() == 'asc':
+                    sorted_value_lst = sorted(self._context["report_menu"][index]["value"],
+                                              key=combiner("key", "lower"), reverse=False)
+                else:
+                    sorted_value_lst = sorted(self._context["report_menu"][index]["value"],
+                                              key=combiner("key", "lower"), reverse=True)
+
                 self._context["report_menu"][index]["value"] = sorted_value_lst
             else:
                 menu = {
@@ -258,27 +273,6 @@ class Context:
             if isinstance(menu.get("value"), list) and len(menu.get("value")) == 1:
                 submenu = menu.get("value")[0].get("value")
                 self._context["report_menu"][idx]["value"] = submenu
-
-    def set_project_menu(self, sample_list):
-        project_menu = []
-        for sample in sample_list:
-            project_menu.append({
-                "key": sample,
-                "value": "project/%s.md" % sample
-            })
-
-        if len(project_menu) > 0:
-            # TODO: more security way to update the value of report_menu.
-            index = next((index for (index, d) in enumerate(self._context["report_menu"])
-                          if d["key"] == "Project"), None)
-            if index:
-                self._context["report_menu"][index]["value"] = project_menu
-            else:
-                menu = {
-                    "key": "Project",
-                    "value": project_menu
-                }
-                self._context["report_menu"].insert(1, menu)
 
     def _init_config(self):
         from report.config import init_config, get_global_config
@@ -308,15 +302,12 @@ class Context:
 
         self._context.update(self.report_context)
 
-    def set_extra_context(self, repo_url=None, site_description=None, site_author=None,
-                          copyright=None, extra_css_lst=[], extra_js_lst=[],
-                          site_name=None, theme_name=None):
-        self.set_repo_url(repo_url)
-        self.set_site_name(site_name)
-        self.set_site_description(site_description)
-        self.set_site_author(site_author)
-        self.set_copyright(copyright)
-        self.set_theme_name(theme_name)
+    def set_extra_context(self, extra_css_lst=[], extra_js_lst=[], **kwargs):
+        for key in kwargs.keys():
+            method = 'set_%s' % key
+            if hasattr(self, method) and kwargs.get(key):
+                getattr(self, method)(kwargs.get(key))
+
         self.set_extra_css_lst(extra_css_lst)
         self.set_extra_js_lst(extra_js_lst)
         self.logger.debug("Report Context(extra context medata): %s" % str(self._context))
@@ -481,11 +472,11 @@ def build(report_dir, project_dir, resource_dir=get_resource_dir(), repo_url=Non
         logger.success("Build markdown files successfully. "
                        "(Files in %s)" % site_dir)
     elif mode == "livereload":
-        logger.info("\n4. Serve %s in livereload mode by mkdocs" % report_dir)
+        logger.info("\n3. Serve %s in livereload mode by mkdocs" % report_dir)
         report.server(dev_addr=dev_addr, livereload="livereload",
                       templ_type=templ_type)
     elif mode == "server":
-        logger.info("\n4. Serve %s by mkdocs" % report_dir)
+        logger.info("\n3. Serve %s by mkdocs" % report_dir)
         report.server(dev_addr=dev_addr, livereload="no-livereload",
                       templ_type=templ_type)
 

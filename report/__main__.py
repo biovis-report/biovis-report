@@ -63,7 +63,6 @@ def call_report(args):
     site_name = args.site_name
     site_description = args.site_description
     site_author = args.site_author
-    copyright = get_copyright(site_author)
 
     project_dir = args.project_dir
     theme = args.theme
@@ -83,8 +82,8 @@ def call_report(args):
     editable = mode == 'livereload'
 
     build_report(report_dir, project_dir, repo_url=repo_url, site_description=site_description,
-                 site_author=site_author, copyright=copyright, site_name=site_name,
-                 mode=mode, dev_addr=dev_addr, force=force, theme_name=theme, editable=editable,
+                 site_author=site_author, site_name=site_name, mode=mode, dev_addr=dev_addr,
+                 force=force, theme_name=theme, editable=editable,
                  enable_media_extension=enable_media_extension)
 
 

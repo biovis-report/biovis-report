@@ -7,7 +7,8 @@
         "site_author": { "type": "string" },
         "copyright": { "type": "string" },
         "site_name": { "type": "string" },
-        "theme_name": { "type": "string" }
+        "theme_name": { "type": "string" },
+        "menu_order": { "type": "string", "enum": ["asc", "desc"] }
     },
     "additionalProperties": false,
     "required": [
