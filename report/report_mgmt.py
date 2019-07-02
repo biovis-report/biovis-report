@@ -221,16 +221,23 @@ class Context:
                 return method(*a, **k)
             return keyextractor
 
-        for item in extra_files:
-            # Use the name of the first level directory as key
-            key = item.strip("/").split("/")[0].title()
-            if re.match(r".*.(md|markdown)$", key):
-                key = key.split(".")[0]
-
-            m = re.search(r"(.*).(md|markdown)$", os.path.basename(item))
+        def get_basename(filename):
+            m = re.search(r"(.*).(md|markdown|Md|Markdown)$", filename)
             # All files must be match the regex pattern.
             assert m is not None
             basename = m.group(1).title()
+            return basename
+
+        for item in extra_files:
+            # Use the name of the first level directory as key
+            keyname = item.strip("/").split("/")[0]
+            # Get file name as key when it is a single file
+            if re.match(r".*.(md|markdown|Md|Markdown)$", keyname):
+                key = get_basename(keyname)
+            else:
+                key = keyname.title()
+
+            basename = get_basename(os.path.basename(item))
 
             file_path = item.replace(strip_pattern, "").strip("/")
             index = next((index for (index, d) in enumerate(self._context["report_menu"])
