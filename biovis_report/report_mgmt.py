@@ -20,8 +20,8 @@ import yaml
 import verboselogs
 from os.path import join as join_path
 from jinja2 import Environment, FileSystemLoader
-import report.exit_code as exit_code
-from report.utils import get_copyright, get_resource_dir, copy_and_overwrite
+import biovis_report.exit_code as exit_code
+from biovis_report.utils import get_copyright, get_resource_dir, copy_and_overwrite
 
 logging.setLoggerClass(verboselogs.VerboseLogger)
 logger = logging.getLogger(__name__)
@@ -63,7 +63,7 @@ class ReportTheme:
         from mkdocs.utils import get_theme_names
 
         # theme_lst = ("mkdocs", "readthedocs", "material", "cinder", "white_ppt")
-        theme_lst = get_theme_names('choppy-report')
+        theme_lst = get_theme_names('biovis-report')
         return theme_lst
 
     @classmethod
@@ -84,7 +84,7 @@ class Context:
 
     def __init__(self, report_dir, project_dir, editable=True,
                  enable_media_extension=True):
-        self.logger = logging.getLogger("choppy-report.report_mgmt.Context")
+        self.logger = logging.getLogger("biovis-report.report_mgmt.Context")
 
         self.report_dir = report_dir
         self.project_dir = project_dir
@@ -106,7 +106,7 @@ class Context:
             "extra_css_lst": [
                 "http://kancloud.nordata.cn/2019-03-21-jquery-confirm.min.css",
                 "http://kancloud.nordata.cn/2019-03-21-loading.css",
-                "http://kancloud.nordata.cn/2019-03-24-choppy-custom.css"
+                "http://kancloud.nordata.cn/2019-03-24-biovis-custom.css"
             ],
             "extra_js_lst": [
                 # For main page.
@@ -117,7 +117,7 @@ class Context:
                 "http://kancloud.nordata.cn/2019-03-21-stackedit-lib.js",
                 "http://kancloud.nordata.cn/2019-03-21-stackedit.js",
                 "http://kancloud.nordata.cn/2019-02-27-iframeResizer.min.js",
-                "http://kancloud.nordata.cn/2019-03-21-choppy-custom.js"
+                "http://kancloud.nordata.cn/2019-03-21-biovis-custom.js"
             ],
             "report_menu": [
                 {
@@ -136,11 +136,11 @@ class Context:
         }
 
         self.report_context = {
-            "repo_url": "http://choppy.3steps.cn",
-            "site_description": "Choppy is a painless reproducibility manager.",
-            "site_author": "choppy",
+            "repo_url": "http://biovis.3steps.cn",
+            "site_description": "BioVis is a painless reproducibility manager.",
+            "site_author": "biovis",
             "copyright": get_copyright(),
-            "site_name": "Choppy Report",
+            "site_name": "BioVis Report",
             "theme_name": "mkdocs",
             "menu_order": "asc",  # asc or desc
         }
@@ -282,7 +282,7 @@ class Context:
                 self._context["report_menu"][idx]["value"] = submenu
 
     def _init_config(self):
-        from report.config import init_config, get_global_config
+        from biovis_report.config import init_config, get_global_config
         defaults = os.path.join(self.report_dir, 'defaults')
         if not os.path.isfile(defaults):
             defaults = os.path.join(get_resource_dir(), 'defaults.template')
@@ -329,7 +329,7 @@ class Renderer:
         self.dest_dir = dest_dir
         self.resource_dir = resource_dir
         self.context_dict = ctx_instance.context
-        self.logger = logging.getLogger("choppy-report.report_mgmt.Renderer")
+        self.logger = logging.getLogger("biovis-report.report_mgmt.Renderer")
 
     def render(self):
         self._gen_docs_config()
@@ -363,7 +363,7 @@ class Report:
         self.config_file = join_path(self.project_dir, ".mkdocs.yml")
         self.config = None
 
-        self.logger = logging.getLogger("choppy-report.report_mgmt.Report")
+        self.logger = logging.getLogger("biovis-report.report_mgmt.Report")
         self._get_raw_config()
 
     def _check_config(self, msg, load_config=True):
@@ -427,7 +427,7 @@ def build(report_dir, project_dir, resource_dir=get_resource_dir(), repo_url=Non
     :param: report_dir: a directory for report templates
     :param: project_dir: a project output directory.
     :param: resource_dir: a directory that host template files.
-    :param: repo_url: a repo url and its prefix is "http://choppy.3steps.cn/".
+    :param: repo_url: a repo url and its prefix is "http://biovis.3steps.cn/".
     :param: site_decription:
     :param: site_author:
     :param: copyright:
@@ -441,7 +441,7 @@ def build(report_dir, project_dir, resource_dir=get_resource_dir(), repo_url=Non
     :param: enable_media_extension: whether enable media extension.
     :return:
     """
-    from report.utils import check_plugin
+    from biovis_report.utils import check_plugin
 
     if enable_media_extension:
         if not check_plugin():

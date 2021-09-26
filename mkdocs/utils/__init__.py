@@ -288,7 +288,7 @@ def get_theme_dir(name):
     return os.path.dirname(os.path.abspath(theme.load().__file__))
 
 
-def get_themes(dist='choppy-report'):
+def get_themes(dist='biovis-report'):
     """ Return a dict of all installed themes as (name, entry point) pairs. """
 
     themes = {}
@@ -315,7 +315,7 @@ def get_themes(dist='choppy-report'):
     return themes
 
 
-def get_theme_names(dist='choppy-report'):
+def get_theme_names(dist='biovis-report'):
     """Return a list of all installed themes by name."""
 
     return get_themes(dist).keys()

@@ -6,10 +6,10 @@ wait_server_seconds = 5
 backoff_factor = 3
 
 [report]
-repo_url = "http://choppy.3steps.cn"
-site_description = "Choppy is a painless reproducibility manager."
-site_author = "choppy"
+repo_url = "http://biovis.3steps.cn"
+site_description = "BioVis is a painless reproducibility manager."
+site_author = "biovis"
 copyright = " "
-site_name = "Choppy Report"
+site_name = "BioVis Report"
 theme_name = "mkdocs"
 menu_order = "desc"

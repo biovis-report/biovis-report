@@ -4,40 +4,40 @@
 >
 > Date: 2018-12-13
 
-# Choppy-report for Scientifically Interactive Report
+# Biovis-report for Scientifically Interactive Report
 
 [中文文档](http://docs.3steps.cn)
 
 ## Introduction
 
-Choppy-report is a fast, simple and downright gorgeous interactive report generator that's geared towards building scientific report. Report source files are written in Markdown, and configured with a single TOML configuration file.
+Biovis-report is a fast, simple and downright gorgeous interactive report generator that's geared towards building scientific report. Report source files are written in Markdown, and configured with a single TOML configuration file.
 
 ## Dependencies
 
-Choppy requires Python 3+ to be loaded in your environment in order for full functionality to work.
+BioVis requires Python 3+ to be loaded in your environment in order for full functionality to work.
 
 ## Installation
 
 ```
 virtualenv .env
 source .env/bin/activate
-pip install choppy-report
+pip install biovis-report
 
 # If you want to use a plugin, just need to install it as below.
 conda install plugin_name
 
 # Activate bash auto-complete
 activate-global-python-argcomplete
-eval "$(register-python-argcomplete choppy-report)"
+eval "$(register-python-argcomplete biovis-report)"
 ```
 
 ## Usage
 
-Below is choppy-report's basic help text. Choppy-report expects one of three usage modes to
+Below is biovis-report's basic help text. Biovis-report expects one of three usage modes to
 be indicated as it's first argument: report, manplugin, or plugins.
 
 ```
-usage: choppy-report <positional argument> [<args>]
+usage: biovis-report <positional argument> [<args>]
 
 Description: A tool for generating a scientifically interactive report.
 

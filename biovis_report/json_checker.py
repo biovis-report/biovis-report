@@ -4,7 +4,7 @@ import re
 import sys
 import json
 import logging
-from report import exit_code
+from biovis_report import exit_code
 from json.decoder import JSONDecodeError
 from io import StringIO
 

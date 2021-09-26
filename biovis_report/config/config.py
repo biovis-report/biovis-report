@@ -3,7 +3,7 @@ import os
 import toml
 import logging
 from threading import local
-from report import exceptions
+from biovis_report import exceptions
 
 logger = logging.getLogger(__name__)
 g = local()
@@ -20,7 +20,7 @@ class ReportConfig:
     conf_dir = os.path.dirname(os.path.abspath(__file__))
 
     def __init__(self, config_file):
-        self.logger = logging.getLogger('choppy-report.config.Config')
+        self.logger = logging.getLogger('biovis-report.config.Config')
         config_file = os.path.abspath(config_file)
         try:
             self.parsed_toml = toml.load(config_file)
@@ -44,7 +44,7 @@ class ReportConfig:
         """
         import json
         from jsonschema import validate
-        from report.config.schema import ChoppyValidator
+        from biovis_report.config.schema import BioVisValidator
 
         valid_name = 'config_%s.json' % name
         fname_lst = [x for x in self.schemas if x == valid_name or valid_name in x]
@@ -52,10 +52,10 @@ class ReportConfig:
         # May be it will cause error when matched file are greater than two.
         filename = fname_lst[0] if len(fname_lst) > 0 else None
         if filename:
-            self.logger.debug("Validate choppy config file.")
+            self.logger.debug("Validate biovis config file.")
             with open(filename, 'r') as f:
                 schema = json.load(f)
-                validate(data, schema, cls=ChoppyValidator)
+                validate(data, schema, cls=BioVisValidator)
         else:
             raise exceptions.NoSuchSchema("No such schema file: %s" % valid_name)
 

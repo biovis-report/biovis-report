@@ -3,4 +3,4 @@ from __future__ import unicode_literals
 
 
 def get_version():
-    return "0.3.8.dev"
+    return "0.4.0"

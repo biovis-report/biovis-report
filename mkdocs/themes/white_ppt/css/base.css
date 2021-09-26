@@ -451,7 +451,7 @@ h1:hover .headerlink, h2:hover .headerlink, h3:hover .headerlink, h4:hover .head
 }
 
 /* For Plugin */
-.choppy-plot-container,
+.biovis-plot-container,
 .plotly-graph-div,
 .bk-root {
     width: 100%;

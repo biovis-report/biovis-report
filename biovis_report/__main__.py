@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 # PYTHON_ARGCOMPLETE_OK
 """
-Choppy report is a tool for generating an interactive report.
+BioVis report is a tool for generating an interactive report.
 """
 from __future__ import unicode_literals, absolute_import
 import argcomplete
@@ -12,14 +12,14 @@ import sys
 import logging
 import coloredlogs
 import verboselogs
-from report.version import get_version
-from report.report_mgmt import (get_mode, ReportTheme)
-from report.plugin_utils import (listplugins, get_plugin)
-from report.utils import is_valid, is_valid_url
+from biovis_report.version import get_version
+from biovis_report.report_mgmt import (get_mode, ReportTheme)
+from biovis_report.plugin_utils import (listplugins, get_plugin)
+from biovis_report.utils import is_valid, is_valid_url
 
 
 logging.setLoggerClass(verboselogs.VerboseLogger)
-logger = logging.getLogger('choppy-report')
+logger = logging.getLogger('biovis-report')
 
 
 def set_logger(loglevel):
@@ -53,8 +53,8 @@ def call_plugin_readme(args):
 
 def call_report(args):
     import atexit
-    from report.report_mgmt import build as build_report
-    from report.utils import Process
+    from biovis_report.report_mgmt import build as build_report
+    from biovis_report.utils import Process
 
     process = Process()
     atexit.register(process.clean_processs)
@@ -88,7 +88,7 @@ def call_report(args):
 
 
 def call_version(args):
-    print("Choppy Report %s" % get_version())
+    print("BioVis Report %s" % get_version())
 
 
 description = """Global Management:
@@ -97,13 +97,13 @@ description = """Global Management:
 Report Management:
     report      Generate a report for an app or the specified template files automatically.
     manplugin   Get manual about report plugin.
-    plugins     List all plugins that is supported by choppy report.
+    plugins     List all plugins that is supported by biovis report.
 """
 
 
 parser = argparse.ArgumentParser(
     description='Description: A tool for generating a scientifically interactive report.',
-    usage='choppy <positional argument> [<args>]',
+    usage='biovis <positional argument> [<args>]',
     formatter_class=argparse.RawDescriptionHelpFormatter)
 
 parser.add_argument('--handler', action='store', default='stream', choices=('stream', 'file'),
@@ -115,20 +115,20 @@ group.add_argument('-v', '--verbose', action='count', default=0, help='Increase 
 
 sub = parser.add_subparsers(title='commands', description=description)
 pluginlst = sub.add_parser(name="plugins",
-                           description="List all plugins that is supported by choppy report.",
-                           usage="choppy plugins",
+                           description="List all plugins that is supported by biovis report.",
+                           usage="biovis plugins",
                            formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 pluginlst.set_defaults(func=call_list_plugins)
 
 version = sub.add_parser(name="version",
                          description="Show the version.",
-                         usage="choppy version",
+                         usage="biovis version",
                          formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 version.set_defaults(func=call_version)
 
 plugin = sub.add_parser(name="manplugin",
                         description="Get man about report plugin.",
-                        usage="choppy manplugin <plugin_name> [<args>]",
+                        usage="biovis manplugin <plugin_name> [<args>]",
                         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 plugin.add_argument('plugin_name', action='store', choices=listplugins(),
                     help='The plugin name for your report.', metavar="plugin_name")
@@ -139,7 +139,7 @@ plugin.set_defaults(func=call_plugin_readme)
 
 report = sub.add_parser(name="report",
                         description="Generate report for your app results.",
-                        usage="choppy report [<args>]",
+                        usage="biovis report [<args>]",
                         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 report.add_argument('-t', '--report-dir', action='store', type=is_valid, default=os.getcwd(),
                     help='The directory that contains your report template files.')
@@ -148,7 +148,7 @@ report.add_argument('--dev-addr', action='store', default='127.0.0.1:8000', help
                     metavar='<IP:PORT>')
 report.add_argument('-f', '--force', action='store_true', default=False, help='Force to regenerate files.')
 report.add_argument('-e', '--enable-plugin', action='store_true', default=False,
-                    help='Enable to support choppy plugins.')
+                    help='Enable to support biovis plugins.')
 report.add_argument('-p', '--project-dir', action='store', default=os.getcwd(),
                     help='Your project directory', type=is_valid)
 report.add_argument('--theme', action='store', choices=ReportTheme.get_theme_lst(),

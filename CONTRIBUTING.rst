@@ -1,7 +1,7 @@
-How to contribute to choppy-report
+How to contribute to biovis-report
 ==================================
 
-Thank you for considering contributing to choppy-report!
+Thank you for considering contributing to biovis-report!
 
 Support questions
 -----------------
@@ -10,9 +10,9 @@ Please, don't use the issue tracker for this. Use one of the following
 resources for questions about your own code:
 
 * Ask on `Stack Overflow`_. Search with Google first using:
-  ``site:stackoverflow.com choppy-report {search term, exception message, etc.}``
+  ``site:stackoverflow.com biovis-report {search term, exception message, etc.}``
 
-.. _Stack Overflow: https://stackoverflow.com/questions/tagged/choppy-report?sort=linked
+.. _Stack Overflow: https://stackoverflow.com/questions/tagged/biovis-report?sort=linked
 
 Reporting issues
 ----------------
@@ -23,12 +23,12 @@ Reporting issues
   own code.
 - Describe what actually happened. Include the full traceback if there was an
   exception.
-- List your Python, Choppy, and Cromwell versions. If possible, check if this
+- List your Python, BioVis, and Cromwell versions. If possible, check if this
   issue is already fixed in the repository.
 
 .. _minimal, complete, and verifiable example: https://stackoverflow.com/help/reprex
 
-Submitting choppy plugin
+Submitting biovis plugin
 ------------------------
 
 - Include tests if your patch is supposed to solve a bug, and explain
@@ -50,20 +50,20 @@ First time setup
 - Fork Flask to your GitHub account by clicking the `Fork`_ button.
 - `Clone`_ your GitHub fork locally::
 
-        git clone https://github.com/{username}/choppy-report
-        cd choppy
+        git clone https://github.com/{username}/biovis-report
+        cd biovis
 
 - Add the main repository as a remote to update later::
 
-        git remote add choppy https://github.com/go-choppy/choppy-report
-        git fetch choppy
+        git remote add biovis https://github.com/go-biovis/biovis-report
+        git fetch biovis
 
 - Create a virtualenv::
 
         python3 -m venv env
         . env/bin/activate
 
-- Install Choppy in editable mode with development dependencies::
+- Install BioVis in editable mode with development dependencies::
 
         pip install -e ".[dev]"
 
@@ -71,7 +71,7 @@ First time setup
 .. _latest version of git: https://git-scm.com/downloads
 .. _username: https://help.github.com/articles/setting-your-username-in-git/
 .. _email: https://help.github.com/articles/setting-your-email-in-git/
-.. _Fork: https://github.com/go-choppy/choppy-report/fork
+.. _Fork: https://github.com/go-biovis/biovis-report/fork
 .. _Clone: https://help.github.com/articles/fork-a-repo/#step-2-create-a-local-clone-of-your-fork
 
 Start coding
@@ -101,7 +101,7 @@ Run the basic test suite with::
     pytest
 
 This only runs the tests for the current environment. Whether this is relevant
-depends on which part of Choppy you're working on.
+depends on which part of BioVis you're working on.
 
 The full test suite takes a long time to run because it tests multiple
 combinations of Python and dependencies. You need to have Python 3.6+
@@ -143,7 +143,7 @@ Read more about `Sphinx <https://www.sphinx-doc.org>`_.
 make targets
 ~~~~~~~~~~~~
 
-Choppy-report provides a ``Makefile`` with various shortcuts. They will ensure that
+Biovis-report provides a ``Makefile`` with various shortcuts. They will ensure that
 all dependencies are installed.
 
 - ``make test`` runs the basic test suite with ``pytest``

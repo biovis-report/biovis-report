@@ -1,10 +1,10 @@
 # {% set data = load_setup_py_data() %}
-{% set version = '0.3.8.dev0' %}
-{% set url = 'http://choppy.3steps.cn/go-choppy/choppy-report' %}
-{% set description = 'Choppy-report is a tool for generating a scientifically interactive report.' %}
+{% set version = '0.4.00' %}
+{% set url = 'https://github.com/biovis-report/biovis-report-core' %}
+{% set description = 'BioVisReport is a tool for generating a scientifically interactive report.' %}
 
 package:
-  name: choppy-report
+  name: biovis-report
   version: {{ version }}
 
 
@@ -15,7 +15,7 @@ source:
 build:
   include_recipe: True
   entry_points:
-    - choppy-report = report.__main__:main
+    - biovis-report = biovis_report.__main__:main
 
 
 requirements:
@@ -40,10 +40,11 @@ requirements:
     - argcomplete
     - toml
     - pymdown-extensions
+    - verboselogs
 
 test:
   commands:
-    - choppy-report -h
+    - biovis-report -h
 
 about:
   home: {{ url }}
@@ -52,6 +53,6 @@ about:
   license_family: GNU
 
   summary: {{ description }}
-  description: 'Choppy-report is a fast, simple and downright gorgeous interactive report generator that's geared towards building scientific report. Report source files are written in Markdown, and configured with a single TOML configuration file.'
-  doc_url: http://docs.3steps.cn
+  description: 'Biovis-report is a fast, simple and downright gorgeous interactive report generator that's geared towards building scientific report. Report source files are written in Markdown, and configured with a single TOML configuration file.'
+  doc_url: https://biovis-report.github.io
   dev_url: {{ url }}

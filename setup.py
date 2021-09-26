@@ -6,11 +6,11 @@ from setuptools import setup
 import re
 import os
 import sys
-from report.version import get_version as get_report_version
+from biovis_report.version import get_version as get_report_version
 
 
 long_description = (
-    "Choppy-report is a fast, simple and downright gorgeous interactive report generator "
+    "Biovis-report is a fast, simple and downright gorgeous interactive report generator "
     "that's geared towards building scientific report. Report source files are written in "
     "Markdown, and configured with a single TOML configuration file."
 )
@@ -45,15 +45,15 @@ if sys.argv[-1] == "publish":
 
 
 setup(
-    name="choppy-report",
+    name="biovis-report",
     version=get_report_version(),
-    url="http://choppy.3steps.cn/go-choppy/choppy-report",
+    url="https://github.com/biovis-report/biovis-report-core",
     license="BSD",
     description="Interactive Report with Markdown.",
     long_description=long_description,
     author="Jingcheng Yang",
     author_email="yjcyxky@163.com",  # SEE NOTE BELOW (*)
-    packages=get_packages("mkdocs") + get_packages("report"),
+    packages=get_packages("mkdocs") + get_packages("biovis_report"),
     include_package_data=True,
     install_requires=[
         "click>=3.3",
@@ -69,16 +69,17 @@ setup(
         "coloredlogs",
         "argcomplete",
         "toml",
-        "pymdown-extensions"
+        "pymdown-extensions",
+        "verboselogs>=1.7"
     ],
-    python_requires="!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*",
+    python_requires="!=2.7.*,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*",
     entry_points={
         "console_scripts": [
-            "choppy-report = report.__main__:main",
+            "biovis-report = biovis_report.__main__:main",
         ],
         "mkdocs.themes": [
-            "pgx_mkdocs = mkdocs.themes.choppy_mkdocs",
-            "pgx_rtd = mkdocs.themes.choppy_readthedocs",
+            "pgx_mkdocs = mkdocs.themes.biovis_mkdocs",
+            "pgx_rtd = mkdocs.themes.biovis_readthedocs",
             "white_ppt = mkdocs.themes.white_ppt",
             "mkdocs = mkdocs.themes.mkdocs",
             "docskimmer = mkdocs.themes.mkdocs_docskimmer",

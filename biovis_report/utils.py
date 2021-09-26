@@ -30,7 +30,7 @@ def check_plugin():
         return True
     except ImportError:
         msg = 'Use `pip install mk_media_extension` to support report plugin.\n'
-        logger.warning('Report plugin is not yet supported by choppy.\n%s' % msg)
+        logger.warning('Report plugin is not yet supported by biovis.\n%s' % msg)
         return False
 
 
@@ -56,14 +56,14 @@ def is_valid_url(url):
         return False
 
 
-def get_copyright(site_author='choppy'):
+def get_copyright(site_author='biovis'):
     if not site_author:
-        site_author = 'choppy'
+        site_author = 'biovis'
 
     year = datetime.now().year
     copyright = 'Copyright &copy; {} {}, ' \
-                'Powered by <a href="http://choppy.3steps.cn">' \
-                'Choppy</a>.'.format(year, site_author.title())
+                'Powered by <a href="http://biovis.3steps.cn">' \
+                'BioVis</a>.'.format(year, site_author.title())
     return copyright
 
 
@@ -184,7 +184,7 @@ def get_candidate_name():
 
 class Process:
     def __init__(self):
-        self.logger = logging.getLogger('choppy.utils.Process')
+        self.logger = logging.getLogger('biovis.utils.Process')
 
     def get_process(self, process_id):
         try:
