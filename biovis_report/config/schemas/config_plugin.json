@@ -2,11 +2,31 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "protocol": { "type": "string", "enum": ["http", "https"] },
-        "domain": { "type": "string" },
-        "enable_iframe": { "type": "boolean" },
-        "wait_server_seconds": { "type": "integer", "minimum": 0 },
-        "backoff_factor": { "type": "integer", "minimum": 0 }
+        "protocol": {
+            "type": "string",
+            "enum": [
+                "http",
+                "https"
+            ]
+        },
+        "domain": {
+            "type": "string"
+        },
+        "enable_iframe": {
+            "type": "boolean"
+        },
+        "wait_server_seconds": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "backoff_factor": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "target_fsize": {
+            "type": "integer",
+            "minimum": 10
+        }
     },
     "additionalProperties": false,
     "required": [

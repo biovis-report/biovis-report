@@ -64,11 +64,9 @@ setup(
         "PyYAML>=3.10",
         "tornado>=5.0",
         "beautifulsoup4",
-        "Jinja2",
         "psutil",
         "coloredlogs",
         "argcomplete",
-        "toml",
         "pymdown-extensions",
         "verboselogs>=1.7"
     ],
@@ -78,8 +76,8 @@ setup(
             "biovis-report = biovis_report.__main__:main",
         ],
         "mkdocs.themes": [
-            "pgx_mkdocs = mkdocs.themes.biovis_mkdocs",
-            "pgx_rtd = mkdocs.themes.biovis_readthedocs",
+            "biovis_mkdocs = mkdocs.themes.biovis_mkdocs",
+            "biovis_rtd = mkdocs.themes.biovis_readthedocs",
             "white_ppt = mkdocs.themes.white_ppt",
             "mkdocs = mkdocs.themes.mkdocs",
             "docskimmer = mkdocs.themes.mkdocs_docskimmer",

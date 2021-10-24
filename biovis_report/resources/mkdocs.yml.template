@@ -48,7 +48,7 @@ markdown_extensions:
     - pymdownx.inlinehilite:
         style_plain_text: True
     {% if context.enable_media_extension -%}
-    - mk_media_extension:
+    - biovis_media_extension:
         net_dir: {{ context.plugin_dir }}
         sync_oss: True
         sync_http: True

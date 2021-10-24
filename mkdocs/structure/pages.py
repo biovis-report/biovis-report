@@ -191,7 +191,7 @@ class Page(object):
         Set raw markdown as page content
         """
         import re
-        extensions = ['mk_media_extension']
+        extensions = ['biovis_media_extension']
         md = markdown.Markdown(
             extensions=extensions,
             extension_configs=config['mdx_configs'] or {}

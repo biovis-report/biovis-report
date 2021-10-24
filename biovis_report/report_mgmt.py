@@ -86,8 +86,8 @@ class Context:
                  enable_media_extension=True):
         self.logger = logging.getLogger("biovis-report.report_mgmt.Context")
 
-        self.report_dir = report_dir
-        self.project_dir = project_dir
+        self.report_dir = os.path.abspath(report_dir)
+        self.project_dir = os.path.abspath(project_dir)
 
         self._context = {
             # For Mkdocs
@@ -100,24 +100,24 @@ class Context:
             "project_name": os.path.basename(self.project_dir),
             "extra_header_js_lst": [
                 # For non iframe mode.
-                "http://kancloud.nordata.cn/2019-03-22-load-script-0.1.3.js",
-                "http://kancloud.nordata.cn/2019-03-22-web-inject.min.js"
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-22-load-script-0.1.3.js",
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-22-web-inject.min.js"
             ],
             "extra_css_lst": [
-                "http://kancloud.nordata.cn/2019-03-21-jquery-confirm.min.css",
-                "http://kancloud.nordata.cn/2019-03-21-loading.css",
-                "http://kancloud.nordata.cn/2019-03-24-biovis-custom.css"
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-jquery-confirm.min.css",
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-loading.css",
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-24-biovis-custom.css"
             ],
             "extra_js_lst": [
                 # For main page.
-                "http://kancloud.nordata.cn/2019-03-21-jquery-2.1.1.min.js",
-                "http://kancloud.nordata.cn/2019-03-21-jquery-confirm.min.js",
-                "http://kancloud.nordata.cn/2019-03-21-loading.js",
-                "http://kancloud.nordata.cn/2019-03-21-notify.js",
-                "http://kancloud.nordata.cn/2019-03-21-stackedit-lib.js",
-                "http://kancloud.nordata.cn/2019-03-21-stackedit.js",
-                "http://kancloud.nordata.cn/2019-02-27-iframeResizer.min.js",
-                "http://kancloud.nordata.cn/2019-03-21-biovis-custom.js"
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-jquery-2.1.1.min.js",
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-jquery-confirm.min.js",
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-loading.js",
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-notify.js",
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-stackedit-lib.js",
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-stackedit.js",
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-02-27-iframeResizer.min.js",
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-biovis-custom.js"
             ],
             "report_menu": [
                 {
@@ -133,6 +133,7 @@ class Context:
             "protocol": "http",
             "domain": "127.0.0.1",
             "enable_iframe": True,
+            "target_fsize": 10,
         }
 
         self.report_context = {

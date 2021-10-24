@@ -26,10 +26,10 @@ def get_resource_dir():
 
 def check_plugin():
     try:
-        import mk_media_extension  # noqa
+        import biovis_media_extension  # noqa
         return True
     except ImportError:
-        msg = 'Use `pip install mk_media_extension` to support report plugin.\n'
+        msg = 'Use `pip install biovis_media_extension` to support report plugin.\n'
         logger.warning('Report plugin is not yet supported by biovis.\n%s' % msg)
         return False
 

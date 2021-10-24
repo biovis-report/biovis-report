@@ -1,11 +1,11 @@
-# {% set data = load_setup_py_data() %}
-{% set version = '0.4.00' %}
-{% set url = 'https://github.com/biovis-report/biovis-report-core' %}
-{% set description = 'BioVisReport is a tool for generating a scientifically interactive report.' %}
+{% set data = load_setup_py_data() %}
+# {% set version = '0.4.00' %}
+# {% set url = 'https://github.com/biovis-report/biovis-report-core' %}
+# {% set description = 'BioVisReport is a tool for generating a scientifically interactive report.' %}
 
 package:
   name: biovis-report
-  version: {{ version }}
+  version: {{ data.version }}
 
 
 source:
@@ -20,39 +20,39 @@ build:
 
 requirements:
   build:
-    - python
+    - python {{ python }}
     - setuptools
 
   run:
-    - python
-    - click
-    - Jinja2
-    - livereload
-    - lunr
-    - nltk
-    - singledispatch
-    - Markdown
-    - PyYAML
-    - tornado
+    - python {{ python }}
+    - click >=3.3
+    - Jinja2 >=2.7.1
+    - livereload >=2.5.1
+    - lunr[languages] >=0.5.2
+    - Markdown >=2.3.1
+    - PyYAML >=3.10
+    - tornado >=5.0
     - beautifulsoup4
+    - toml >=0.10.0
+    - verboselogs >=1.7
     - psutil
     - coloredlogs
     - argcomplete
-    - toml
     - pymdown-extensions
-    - verboselogs
+    - nltk
+    - singledispatch
 
 test:
   commands:
     - biovis-report -h
 
 about:
-  home: {{ url }}
+  home: {{ data.url }}
   license: AGPL 3.0
   license_file: LICENSE
   license_family: GNU
 
-  summary: {{ description }}
-  description: 'Biovis-report is a fast, simple and downright gorgeous interactive report generator that's geared towards building scientific report. Report source files are written in Markdown, and configured with a single TOML configuration file.'
+  summary: {{ data.description }}
+  description: Biovis-report is a fast, simple and downright gorgeous interactive report generator that's geared towards building scientific report. Report source files are written in Markdown, and configured with a single TOML configuration file.
   doc_url: https://biovis-report.github.io
-  dev_url: {{ url }}
+  dev_url: {{ data.url }}
