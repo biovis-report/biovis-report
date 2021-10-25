@@ -41,6 +41,7 @@ requirements:
     - pymdown-extensions
     - nltk
     - singledispatch
+    - jsonschema >=4.1.2
 
 test:
   commands:

@@ -12,3 +12,4 @@ psutil
 coloredlogs
 argcomplete
 pymdown-extensions
+jsonschema>=4.1.2
