@@ -222,11 +222,14 @@ class Context:
                 return method(*a, **k)
             return keyextractor
 
+        def remove_special_chars(string):
+            return re.sub(r'[-_]', ' ', string)
+
         def get_basename(filename):
             m = re.search(r"(.*).(md|markdown|Md|Markdown)$", filename)
             # All files must be match the regex pattern.
             assert m is not None
-            basename = m.group(1).title()
+            basename = remove_special_chars(m.group(1)).title()
             return basename
 
         for item in extra_files:
@@ -236,7 +239,7 @@ class Context:
             if re.match(r".*.(md|markdown|Md|Markdown)$", keyname):
                 key = get_basename(keyname)
             else:
-                key = keyname.title()
+                key = remove_special_chars(keyname).title()
 
             basename = get_basename(os.path.basename(item))
 

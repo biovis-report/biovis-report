@@ -17,8 +17,8 @@ BioVis requires Python 3+ to be loaded in your environment in order for full fun
 ## Installation
 
 ```
-conda create -n biovis-report python=3.8
-pip3 install biovis-report biovis-media-extension
+# It is recommended to install Python 3.8, and don't forget to specify the biovis-report and conda-forge channels please.
+conda create -c biovis-report -c conda-forge -n biovis-report python=3.8 biovis-report biovis-media-extension
 
 # If you want to use a plugin, just need to install it as below.
 conda install -c biovis-report -c conda-forge plugin_name
@@ -91,8 +91,8 @@ optional arguments:
   conda install -c biovis-report -c conda-forge lollipop-plot-r
   ```
 
-4. [piechart-js](https://github.com/biovis-report/piechart-js): Interactive pie chart. It is based on echarts.
+4. [pie-chart-js](https://github.com/biovis-report/pie-chart-js): Interactive pie chart. It is based on echarts.
 
   ```bash
-  conda install -c biovis-report -c conda-forge piechart-js
+  conda install -c biovis-report -c conda-forge pie-chart-js
   ```
