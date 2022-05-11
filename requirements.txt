@@ -1,15 +1,13 @@
-click>=3.3
-Jinja2>=2.7.1
-livereload>=2.5.1
-lunr[languages]>=0.5.2
-Markdown>=2.3.1
-PyYAML>=3.10
-tornado>=5.0
-beautifulsoup4
-toml>=0.10.0
-verboselogs>=1.7
+click >=3.3
+Jinja2 >=2.7.1
+livereload >=2.5.1
+lunr[languages] >=0.5.2
+Markdown >=2.3.1
+PyYAML >=3.10
+tornado >=5.0
+toml >=0.10.0
+verboselogs >=1.7
 psutil
 coloredlogs
 argcomplete
-pymdown-extensions
-jsonschema>=4.1.2
+jsonschema >=4.1.2

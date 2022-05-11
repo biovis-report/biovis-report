@@ -63,11 +63,10 @@ setup(
         "Markdown>=2.3.1",
         "PyYAML>=3.10",
         "tornado>=5.0",
-        "beautifulsoup4",
+        "toml >=0.10.0",
         "psutil",
         "coloredlogs",
         "argcomplete",
-        "pymdown-extensions",
         "verboselogs>=1.7",
         "jsonschema>=4.1.2"
     ],
