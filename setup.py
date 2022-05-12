@@ -53,7 +53,7 @@ setup(
     long_description=long_description,
     author="Jingcheng Yang",
     author_email="yjcyxky@163.com",  # SEE NOTE BELOW (*)
-    packages=get_packages("mkdocs") + get_packages("biovis_report"),
+    packages=get_packages("biovis_media_extension") + get_packages("biovis_report"),
     include_package_data=True,
     install_requires=[
         "click",
@@ -65,12 +65,22 @@ setup(
         "coloredlogs",
         "argcomplete",
         "jsonschema",
-        "mkdocs~=1.2"
+        "mkdocs~=1.2",
+        'plotly~=3.6.1',
+        'bokeh~=2.4',
+        'Markdown~=3.0',
+        'pyparsing~=2.3',
+        'requests~=2.21',
+        'multiqc~=1.7',
+        'sqlalchemy~=1.4',
     ],
     python_requires="!=2.7.*,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*",
     entry_points={
         "console_scripts": [
             "biovis-report = biovis_report.__main__:main",
+        ],
+        'markdown.extensions': [
+            'biovis_media_extension = biovis_media_extension.extension:BioVisPluginExtension'
         ]
     },
     classifiers=[

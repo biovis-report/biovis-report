@@ -35,6 +35,13 @@ requirements:
     - argcomplete
     - jsonschema
     - mkdocs ~=1.2
+    - plotly~=3.6.1
+    - bokeh~=2.4
+    - Markdown~=3.0
+    - pyparsing~=2.3
+    - requests~=2.21
+    - multiqc~=1.7
+    - sqlalchemy~=1.4
 
 test:
   commands:
