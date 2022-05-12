@@ -63,7 +63,7 @@ class ReportTheme:
         from mkdocs.utils import get_theme_names
 
         # theme_lst = ("mkdocs", "readthedocs", "material", "cinder", "white_ppt")
-        theme_lst = get_theme_names('biovis-report')
+        theme_lst = get_theme_names()
         return theme_lst
 
     @classmethod
@@ -402,22 +402,19 @@ class Report:
         with open(self.config_file, "w") as f:
             f.write(self.raw_config)
 
-    def build(self, templ_type="html"):
+    def build(self):
         from mkdocs.commands.build import build as build_docs
 
         self._check_config("Attempting to build docs but the mkdocs.yml doesn't exist."
                            " You need to call render/new firstly.")
-        build_docs(self.config, live_server=False, dirty=False,
-                   templ_type=templ_type)
+        build_docs(self.config, live_server=False, dirty=False)
 
-    def server(self, dev_addr=None, livereload="livereload", templ_type="html"):
-        from mkdocs.commands.serve import dev_serve as serve_docs
+    def server(self, dev_addr=None, livereload="livereload"):
+        from mkdocs.commands.serve import serve as serve_docs
 
         self._check_config("Attempting to serve docs but the mkdocs.yml doesn't exist."
                            " You need to call render/new firstly.", load_config=False)
-        serve_docs(config_file=self.config_file, dev_addr=dev_addr,
-                   livereload=livereload, site_dir=self.site_dir,
-                   templ_type=templ_type)
+        serve_docs(config_file=self.config_file, dev_addr=dev_addr, livereload=livereload)
 
 
 def build(report_dir, project_dir, resource_dir=get_resource_dir(), repo_url=None,
@@ -467,29 +464,19 @@ def build(report_dir, project_dir, resource_dir=get_resource_dir(), repo_url=Non
     renderer.render()
     logger.success("Render config file successfully.")
 
-    # Report: build markdown files to html.
-    if theme_name in ReportTheme.get_ppt_theme_lst():
-        templ_type = "ppt"
-    elif theme_name in ReportTheme.get_html_theme_lst():
-        templ_type = "html"
-    else:
-        templ_type = "html"
-
     report = Report(project_dir)
     if mode == "build":
         logger.info("\n3. Build %s by mkdocs" % report_dir)
-        report.build(templ_type=templ_type)
+        report.build()
         site_dir = join_path(project_dir, "report_html")
         logger.success("Build markdown files successfully. "
                        "(Files in %s)" % site_dir)
     elif mode == "livereload":
         logger.info("\n3. Serve %s in livereload mode by mkdocs" % report_dir)
-        report.server(dev_addr=dev_addr, livereload="livereload",
-                      templ_type=templ_type)
+        report.server(dev_addr=dev_addr, livereload="livereload")
     elif mode == "server":
         logger.info("\n3. Serve %s by mkdocs" % report_dir)
-        report.server(dev_addr=dev_addr, livereload="no-livereload",
-                      templ_type=templ_type)
+        report.server(dev_addr=dev_addr, livereload="no-livereload")
 
 
 def get_mode():

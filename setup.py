@@ -56,36 +56,22 @@ setup(
     packages=get_packages("mkdocs") + get_packages("biovis_report"),
     include_package_data=True,
     install_requires=[
-        "click>=3.3",
-        "Jinja2>=2.7.1",
-        "livereload>=2.5.1",
-        "lunr[languages]>=0.5.2",
-        "Markdown>=2.3.1",
-        "PyYAML>=3.10",
-        "tornado>=5.0",
-        "toml >=0.10.0",
+        "click",
+        "Jinja2",
+        "PyYAML",
+        "toml",
+        "verboselogs",
         "psutil",
         "coloredlogs",
         "argcomplete",
-        "verboselogs>=1.7",
-        "jsonschema>=4.1.2"
+        "jsonschema",
+        "mkdocs~=1.2"
     ],
     python_requires="!=2.7.*,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*",
     entry_points={
         "console_scripts": [
             "biovis-report = biovis_report.__main__:main",
-        ],
-        "mkdocs.themes": [
-            "biovis_mkdocs = mkdocs.themes.biovis_mkdocs",
-            "biovis_rtd = mkdocs.themes.biovis_readthedocs",
-            "white_ppt = mkdocs.themes.white_ppt",
-            "mkdocs = mkdocs.themes.mkdocs",
-            "docskimmer = mkdocs.themes.mkdocs_docskimmer",
-        ],
-        "mkdocs.plugins": [
-            "search = mkdocs.contrib.search:SearchPlugin",
-            "header_injector = mkdocs.contrib.header_injector:HeaderInjectorPlugin"
-        ],
+        ]
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -96,10 +82,11 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: Documentation",
