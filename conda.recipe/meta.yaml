@@ -40,7 +40,7 @@ requirements:
     - Markdown~=3.0
     - pyparsing~=2.3
     - requests~=2.21
-    - multiqc~=1.7
+    - multiqc~=1.10
     - sqlalchemy~=1.4
 
 test:

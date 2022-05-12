@@ -6,7 +6,6 @@ from setuptools import setup
 import re
 import os
 import sys
-from biovis_report.version import get_version as get_report_version
 
 
 long_description = (
@@ -16,10 +15,9 @@ long_description = (
 )
 
 
-def get_version(package):
-    """Return package version as listed in `__version__` in `init.py`."""
-    init_py = open(os.path.join(package, "__init__.py")).read()
-    return re.search("__version__ = ['\"]([^'\"]+)['\"]", init_py).group(1)
+def get_version():
+    """Return package version."""
+    return '0.5.0'
 
 
 def get_packages(package):
@@ -46,7 +44,7 @@ if sys.argv[-1] == "publish":
 
 setup(
     name="biovis-report",
-    version=get_report_version(),
+    version=get_version(),
     url="https://github.com/biovis-report/biovis-report-core",
     license="AGPL",
     description="Interactive Report with Markdown.",
@@ -71,7 +69,7 @@ setup(
         'Markdown~=3.0',
         'pyparsing~=2.3',
         'requests~=2.21',
-        'multiqc~=1.7',
+        'multiqc~=1.10',
         'sqlalchemy~=1.4',
     ],
     python_requires="!=2.7.*,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*",
