@@ -1,3 +1,5 @@
 biovis_report.egg-info
+biovis_media_extension.egg-info
 dist
 **/*.pyc
+.pytest_cache

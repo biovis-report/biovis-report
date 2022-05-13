@@ -48,6 +48,13 @@ setup(
     author_email="yjcyxky@163.com",  # SEE NOTE BELOW (*)
     packages=get_packages("biovis_media_extension") + get_packages("biovis_report"),
     include_package_data=True,
+    extras_require={
+        'dev': [
+            "pytest",
+            "sphinx",
+            "autopep8"
+        ]
+    },
     install_requires=[
         "Jinja2~=2.11",
         "PyYAML~=6.0",
@@ -64,7 +71,7 @@ setup(
         "Markdown~=3.3",
         "sqlalchemy~=1.4",
         "multiqc~=1.10",
-        "mkdocs~=1.2"
+        "mkdocs~=1.2",
     ],
     python_requires="!=2.7.*,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*",
     entry_points={

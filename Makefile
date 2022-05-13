@@ -11,9 +11,6 @@ test: clean-pyc install-dev
 docs: clean-pyc install-dev
 	$(MAKE) -C docs html
 
-release:
-	python scripts/make-release.py
-
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
