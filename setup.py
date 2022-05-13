@@ -6,6 +6,7 @@ from setuptools import setup
 import re
 import os
 import sys
+from biovis_report.version import get_version
 
 
 long_description = (
@@ -13,12 +14,6 @@ long_description = (
     "that's geared towards building scientific report. Report source files are written in "
     "Markdown, and configured with a single TOML configuration file."
 )
-
-
-def get_version():
-    """Return package version."""
-    return '0.5.0'
-
 
 def get_packages(package):
     """Return root package and all sub-packages."""
@@ -54,23 +49,22 @@ setup(
     packages=get_packages("biovis_media_extension") + get_packages("biovis_report"),
     include_package_data=True,
     install_requires=[
-        "click",
-        "Jinja2",
-        "PyYAML",
-        "toml",
-        "verboselogs",
-        "psutil",
-        "coloredlogs",
-        "argcomplete",
-        "jsonschema",
-        "mkdocs~=1.2",
-        'plotly~=3.6.1',
-        'bokeh~=2.4',
-        'Markdown~=3.0',
-        'pyparsing~=2.3',
-        'requests~=2.21',
-        'multiqc~=1.10',
-        'sqlalchemy~=1.4',
+        "Jinja2~=3.1",
+        "PyYAML~=6.0",
+        "toml~=0.10",
+        "verboselogs~=1.7",
+        "psutil~=5.9",
+        "coloredlogs~=15.0",
+        "argcomplete~=2.0",
+        "jsonschema~=4.5",
+        "pyparsing~=3.0",
+        "plotly~=5.8",
+        "requests~=2.27",
+        "bokeh~=2.4",
+        "Markdown~=3.3",
+        "sqlalchemy~=1.4",
+        "multiqc~=1.10",
+        "mkdocs~=1.2"
     ],
     python_requires="!=2.7.*,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*",
     entry_points={

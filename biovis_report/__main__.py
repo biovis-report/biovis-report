@@ -105,7 +105,7 @@ parser = argparse.ArgumentParser(
     description='Description: A tool for generating a scientifically interactive report.',
     usage='biovis <positional argument> [<args>]',
     formatter_class=argparse.RawDescriptionHelpFormatter)
-
+parser.set_defaults(func=lambda args: parser.print_help())
 parser.add_argument('--handler', action='store', default='stream', choices=('stream', 'file'),
                     help="Log handler, stream or file?")
 group = parser.add_mutually_exclusive_group()

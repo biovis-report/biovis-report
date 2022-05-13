@@ -1,6 +1,6 @@
 include README.md
 include LICENSE
 recursive-include *.ico *.js *.css *.png *.html *.eot *.svg *.ttf *.woff *.woff2 *.xml *.mustache *mkdocs_theme.yml
-recursive-include biovis_report *.template *.json
+recursive-include biovis_report biovis_media_extension tests
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]

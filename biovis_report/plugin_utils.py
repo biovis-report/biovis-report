@@ -13,8 +13,7 @@ def listplugins():
             return []
 
     try:
-        from biovis_media_extension.plugin import (get_plugins,
-                                               get_internal_plugins)  # noqa
+        from biovis_media_extension.plugin import (get_plugins, get_internal_plugins)  # noqa
         plugins = []
         external_plugins = get_plugin_name_lst(get_plugins())
         internal_plugins = get_plugin_name_lst(get_internal_plugins())
@@ -28,7 +27,7 @@ def listplugins():
 
 def get_plugin(name):
     from biovis_media_extension.plugin import (get_plugins, BasePlugin,
-                                           get_internal_plugins)  # noqa
+                                               get_internal_plugins)  # noqa
     internal_plugins = get_internal_plugins()
     internal_plugin = internal_plugins.get(name)
     if internal_plugin:

@@ -25,27 +25,30 @@ requirements:
 
   run:
     - python {{ python }}
-    - click
-    - Jinja2
-    - PyYAML
-    - toml
-    - verboselogs
-    - psutil
-    - coloredlogs
-    - argcomplete
-    - jsonschema
+    - Jinja2 ~=3.1
+    - PyYAML ~=6.0
+    - toml  ~=0.10
+    - verboselogs ~=1.7
+    - psutil ~=5.9
+    - coloredlogs ~=15.0
+    - argcomplete ~=2.0
+    - jsonschema ~=4.5
+    - pyparsing ~=3.0
+    - plotly ~=5.8
+    - requests ~=2.27
+    - bokeh ~=2.4
+    - Markdown ~=3.3
+    - sqlalchemy ~=1.4
+    - multiqc ~=1.10
     - mkdocs ~=1.2
-    - plotly~=3.6.1
-    - bokeh~=2.4
-    - Markdown~=3.0
-    - pyparsing~=2.3
-    - requests~=2.21
-    - multiqc~=1.10
-    - sqlalchemy~=1.4
 
 test:
   commands:
     - biovis-report -h
+  source_files:
+    tests/test_*.py
+  imports:
+    - biovis_media_extension
 
 about:
   home: {{ data.url }}
