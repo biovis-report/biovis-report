@@ -49,7 +49,7 @@ setup(
     packages=get_packages("biovis_media_extension") + get_packages("biovis_report"),
     include_package_data=True,
     install_requires=[
-        "Jinja2~=3.1",
+        "Jinja2~=2.11",
         "PyYAML~=6.0",
         "toml~=0.10",
         "verboselogs~=1.7",

@@ -410,11 +410,11 @@ class Report:
         build_docs(self.config, live_server=False, dirty=False)
 
     def server(self, dev_addr=None, livereload="livereload"):
-        from mkdocs.commands.serve import serve as serve_docs
+        from biovis_report.serve import serve as serve_docs
 
         self._check_config("Attempting to serve docs but the mkdocs.yml doesn't exist."
                            " You need to call render/new firstly.", load_config=False)
-        serve_docs(config_file=self.config_file, dev_addr=dev_addr, livereload=livereload)
+        serve_docs(config_file=self.config_file, site_dir=self.site_dir, dev_addr=dev_addr, livereload=livereload)
 
 
 def build(report_dir, project_dir, resource_dir=get_resource_dir(), repo_url=None,
@@ -466,7 +466,7 @@ def build(report_dir, project_dir, resource_dir=get_resource_dir(), repo_url=Non
 
     report = Report(project_dir)
     if mode == "build":
-        logger.info("\n3. Build %s by mkdocs" % report_dir)
+        logger.info("\n3. Build %s by biovis-report" % report_dir)
         report.build()
         site_dir = join_path(project_dir, "report_html")
         logger.success("Build markdown files successfully. "
