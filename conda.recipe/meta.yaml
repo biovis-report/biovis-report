@@ -45,8 +45,6 @@ requirements:
 test:
   commands:
     - biovis-report -h
-  source_files:
-    tests/test_*.py
   imports:
     - biovis_media_extension
 
