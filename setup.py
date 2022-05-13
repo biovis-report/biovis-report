@@ -51,11 +51,10 @@ setup(
     extras_require={
         'dev': [
             "pytest",
-            "sphinx",
-            "recommonmark",
-            "sphinx_rtd_theme",
-            "autopep8",
-            "sphinx_markdown_tables"
+            "mkdocs",
+            "mkdocs-git-revision-date-plugin",
+            "mkdocs-material",
+            "autopep8"
         ]
     },
     install_requires=[
