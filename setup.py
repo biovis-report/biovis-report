@@ -52,7 +52,10 @@ setup(
         'dev': [
             "pytest",
             "sphinx",
-            "autopep8"
+            "recommonmark",
+            "sphinx_rtd_theme",
+            "autopep8",
+            "sphinx_markdown_tables"
         ]
     },
     install_requires=[
