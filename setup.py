@@ -74,6 +74,10 @@ setup(
         "sqlalchemy~=1.4",
         "multiqc~=1.10",
         "mkdocs~=1.2",
+        "mkdocs-material~=8.2",
+        "mkdocs-material-extensions~=1.0",
+        "pygments~=2.12",
+        "pymdown-extensions~=9.4"
     ],
     python_requires="!=2.7.*,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*",
     entry_points={

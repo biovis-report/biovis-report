@@ -106,7 +106,8 @@ class Context:
             "extra_css_lst": [
                 "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-jquery-confirm.min.css",
                 "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-loading.css",
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-24-biovis-custom.css"
+                # "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-24-biovis-custom.css"
+                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2022-05-14-biovis-custom.css"
             ],
             "extra_js_lst": [
                 # For main page.
