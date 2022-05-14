@@ -1,15 +1,3 @@
-<!-- Edit and view button -->
-{% if page.edit_url %}
-{% set edit = "https://github.com/chinese-quartet/docs.chinese-quartet.org/edit" %}
-{% set view = "https://raw.githubusercontent.com/chinese-quartet/docs.chinese-quartet.org" %}
-<a href="{{ page.edit_url }}" title="{{ lang.t('edit.link.title') }}" class="md-content__button md-icon">
-  {% include ".icons/material/file-edit-outline.svg" %}
-</a>
-<a href="{{ page.edit_url | replace(edit, view) }}" title="View source of this page" class="md-content__button md-icon">
-  {% include ".icons/material/file-eye-outline.svg" %}
-</a>
-{% endif %}
-
 <!-- Tags -->
 {% if "tags" in config.plugins %}
 {% include "partials/tags.html" %}

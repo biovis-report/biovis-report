@@ -15,8 +15,8 @@ import pkg_resources
 from biovis_media_extension.models import add_plugin, get_plugin
 from biovis_media_extension.process_mgmt import Process
 from biovis_media_extension.utils import (check_dir, copy_and_overwrite,
-                                      BashColors, get_candidate_name,
-                                      find_free_port, get_local_abs_fpath)
+                                          BashColors, get_candidate_name,
+                                          find_free_port, get_local_abs_fpath)
 from biovis_media_extension.file_mgmt import run_copy_files, get_oss_fsize
 from biovis_media_extension.request_mgmt import requests_retry_session
 
@@ -71,6 +71,7 @@ class BasePlugin:
     4. server mode
     5. multiqc mode
     """
+
     def __init__(self, *args, **kwargs):
         """
         Initialize BasePlugin class.
@@ -737,12 +738,12 @@ class BasePlugin:
             if access_url:
                 add_plugin(**metadata, plugin_db=self.plugin_db)
             self.logger.info("Launching plugin server(%s) successfully, Serving on %s.\n" % (self.plugin_name, access_url))
-            return access_url, workdir
+            return access_url, workdir, 'new'
         else:
             self.logger.info("Command doesn't changed, so skip it.")
             self.logger.info("Launching plugin server(%s) successfully, "
                              "Serving on %s.\n" % (self.plugin_name, plugin.access_url))
-            return plugin.access_url, plugin.workdir
+            return plugin.access_url, plugin.workdir, 'old'
 
     def index_js_lst(self, js_lst):
         javascript = self._get_index_lst(js_lst, 'js')
@@ -956,16 +957,21 @@ class BasePlugin:
                 rendered_lst = [iframe, ]
 
         elif self.is_server:
-            access_url, workdir = self._launch_server_plugin()
+            access_url, workdir, status = self._launch_server_plugin()
 
             if workdir:
                 logfile = os.path.join(workdir, 'log')
             else:
                 logfile = ''
+                
+            if status == 'old':
+                wait_server_seconds = 0.01
+            else:
+                wait_server_seconds = self.wait_server_seconds
 
             try:
                 response = requests_retry_session(
-                    delay=self.wait_server_seconds,
+                    delay=wait_server_seconds,
                     backoff_factor=self.backoff_factor
                 ).get(access_url, timeout=10)
             except Exception as err:

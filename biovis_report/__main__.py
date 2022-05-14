@@ -151,7 +151,7 @@ report.add_argument('-e', '--enable-plugin', action='store_true', default=False,
                     help='Enable to support biovis plugins.')
 report.add_argument('-p', '--project-dir', action='store', default=os.getcwd(),
                     help='Your project directory', type=is_valid)
-report.add_argument('--theme', action='store', choices=ReportTheme.get_theme_lst(),
+report.add_argument('--theme', action='store', choices=ReportTheme.get_theme_lst(), default="biovis_report",
                     help='Theming your report by using the specified theme.')
 report.add_argument('--repo-url', action='store', help='Your project repo url', type=is_valid_url)
 report.add_argument('--site-name', action='store', help='The site name for your report website')

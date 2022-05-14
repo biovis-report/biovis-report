@@ -82,7 +82,10 @@ setup(
         ],
         'markdown.extensions': [
             'biovis_media_extension = biovis_media_extension.extension:BioVisPluginExtension'
-        ]
+        ],
+        'mkdocs.themes': [
+            'biovis_report = biovis_report.themes.biovis_mkdocs'
+        ],
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
