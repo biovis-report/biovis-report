@@ -50,11 +50,11 @@ test:
 
 about:
   home: {{ data.url }}
-  license: AGPL 3.0
+  license: MIT
   license_file: LICENSE
-  license_family: AGPL
+  license_family: MIT
 
   summary: {{ data.description }}
   description: Biovis-report is a fast, simple and downright gorgeous interactive report generator that's geared towards building scientific report. Report source files are written in Markdown, and configured with a single TOML configuration file.
-  doc_url: https://biovis-report.github.io
+  doc_url: https://biovis.report
   dev_url: {{ data.url }}

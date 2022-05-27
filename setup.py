@@ -41,7 +41,7 @@ setup(
     name="biovis-report",
     version=get_version(),
     url="https://github.com/biovis-report/biovis-report-core",
-    license="AGPL",
+    license="MIT",
     description="Interactive Report with Markdown.",
     long_description=long_description,
     author="Jingcheng Yang",
