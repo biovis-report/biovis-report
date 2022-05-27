@@ -3,3 +3,4 @@ biovis_media_extension.egg-info
 dist
 **/*.pyc
 .pytest_cache
+.DS_Store

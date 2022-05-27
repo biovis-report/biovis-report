@@ -62,7 +62,7 @@ def get_copyright(site_author='biovis'):
 
     year = datetime.now().year
     copyright = 'Copyright &copy; {} {}, ' \
-                'Powered by <a href="http://biovis.3steps.cn">' \
+                'Powered by <a href="http://biovis.report">' \
                 'BioVis</a>.'.format(year, site_author.title())
     return copyright
 

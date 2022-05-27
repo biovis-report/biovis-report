@@ -6,7 +6,7 @@ wait_server_seconds = 5
 backoff_factor = 3
 
 [report]
-repo_url = "http://biovis.3steps.cn"
+repo_url = "http://biovis.report"
 site_description = "BioVis is a painless reproducibility manager."
 site_author = "biovis"
 copyright = " "

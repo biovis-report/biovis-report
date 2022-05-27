@@ -100,26 +100,26 @@ class Context:
             "project_name": os.path.basename(self.project_dir),
             "extra_header_js_lst": [
                 # For non iframe mode.
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-22-load-script-0.1.3.js",
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-22-web-inject.min.js"
+                "https://cdn.biovis.report/assets/2019-03-22-load-script-0.1.3.js",
+                "https://cdn.biovis.report/assets/2019-03-22-web-inject.min.js"
             ],
             "extra_css_lst": [
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-jquery-confirm.min.css",
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-loading.css",
-                # "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-24-biovis-custom.css"
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2022-05-14-biovis-custom.css"
+                "https://cdn.biovis.report/assets/2019-03-21-jquery-confirm.min.css",
+                "https://cdn.biovis.report/assets/2019-03-21-loading.css",
+                # "https://cdn.biovis.report/assets/2019-03-24-biovis-custom.css"
+                "https://cdn.biovis.report/assets/2022-05-14-biovis-custom.css"
             ],
             "extra_js_lst": [
                 # For main page.
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-jquery-2.1.1.min.js",
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-jquery-confirm.min.js",
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-loading.js",
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-notify.js",
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-stackedit-lib.js",
-                # "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-stackedit.js",
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2022-05-14-stackedit.js",
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-02-27-iframeResizer.min.js",
-                "http://nordata-cdn.oss-cn-shanghai.aliyuncs.com/biovis-report/2019-03-21-biovis-custom.js"
+                "https://cdn.biovis.report/assets/2019-03-21-jquery-2.1.1.min.js",
+                "https://cdn.biovis.report/assets/2019-03-21-jquery-confirm.min.js",
+                "https://cdn.biovis.report/assets/2019-03-21-loading.js",
+                "https://cdn.biovis.report/assets/2019-03-21-notify.js",
+                "https://cdn.biovis.report/assets/2019-03-21-stackedit-lib.js",
+                # "https://cdn.biovis.report/assets/2019-03-21-stackedit.js",
+                "https://cdn.biovis.report/assets/2022-05-14-stackedit.js",
+                "https://cdn.biovis.report/assets/2019-02-27-iframeResizer.min.js",
+                "https://cdn.biovis.report/assets/2019-03-21-biovis-custom.js"
             ],
             "report_menu": [
                 {
@@ -139,7 +139,7 @@ class Context:
         }
 
         self.report_context = {
-            "repo_url": "http://biovis.3steps.cn",
+            "repo_url": "http://biovis.report",
             "site_description": "BioVis is a painless reproducibility manager.",
             "site_author": "biovis",
             "copyright": get_copyright(),
@@ -430,7 +430,7 @@ def build(report_dir, project_dir, resource_dir=get_resource_dir(), repo_url=Non
     :param: report_dir: a directory for report templates
     :param: project_dir: a project output directory.
     :param: resource_dir: a directory that host template files.
-    :param: repo_url: a repo url and its prefix is "http://biovis.3steps.cn/".
+    :param: repo_url: a repo url and its prefix is "http://biovis.report/".
     :param: site_decription:
     :param: site_author:
     :param: copyright:
