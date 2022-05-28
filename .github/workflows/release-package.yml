@@ -26,7 +26,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install conda-build
         shell: bash -l {0}
-        run: mamba install conda-build
+        # Error: expected str, bytes or os.PathLike object, not list
+        # More details on https://github.com/conda/conda-build/issues/4222
+        run: mamba install conda-build anaconda-client
       - name: Package & Release
         shell: bash -l {0}
-        run: mamba build ./conda.recipe --token ${{ secrets.ANACONDA_TOKEN }} --user biovis-report --skip-existing --output-folder ./build
+        run: mamba build conda.recipe --token ${{ secrets.ANACONDA_TOKEN }} --user biovis-report --skip-existing --output-folder build
