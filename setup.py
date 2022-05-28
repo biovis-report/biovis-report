@@ -59,7 +59,7 @@ setup(
     },
     install_requires=[
         "Jinja2~=2.11",
-        "markupsafe~=2.0"
+        "markupsafe~=2.0",
         "PyYAML~=6.0",
         "toml~=0.10",
         "verboselogs~=1.7",
