@@ -92,7 +92,7 @@ class BasePlugin:
         self.domain = kwargs.get('domain', '127.0.0.1')
         self.protocol = kwargs.get('protocol', 'http')
         self.enable_iframe = kwargs.get('enable_iframe', True)
-        self.wait_server_seconds = kwargs.get('wait_server_seconds') or 5
+        self.wait_server_seconds = kwargs.get('wait_server_seconds') or 1
         self.backoff_factor = kwargs.get('backoff_factor') or 3
         # Parse args from markdown new syntax. e.g.
         # @scatter_plot(a=1, b=2, c=3)

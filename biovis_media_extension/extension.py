@@ -21,7 +21,7 @@ class Code:
     def __init__(self, code, net_dir, sync_oss=True, sync_http=True,
                  sync_ftp=True, target_fsize=10, protocol='http',
                  domain='127.0.0.1', enable_iframe=True,
-                 wait_server_seconds=5, backoff_factor=3):
+                 wait_server_seconds=1, backoff_factor=3):
         """
         Initialize code instance.
 
@@ -220,7 +220,7 @@ class BioVisPluginPreprocessor(Preprocessor):
         self.protocol = config.get('protocol', 'http')
         self.domain = config.get('domain', '127.0.0.1')
         self.enable_iframe = config.get('enable_iframe', True)
-        self.wait_server_seconds = config.get('wait_server_seconds', 5)
+        self.wait_server_seconds = config.get('wait_server_seconds', 1)
         self.backoff_factor = config.get('backoff_factor', 3)
 
         if self.net_dir is None:
@@ -282,7 +282,7 @@ class BioVisPluginExtension(Extension):
             'protocol': ['http', 'Http protocol'],
             'domain': ['127.0.0.1', 'Domain for plugin server'],
             'enable_iframe': [True, 'Enable to generate iframe for all plugins'],
-            'wait_server_seconds': [5, 'If you specify a wait_server_seconds that greater than 0, sleep() will sleep for wait_server_seconds. When wait_server_seconds less than or equal than 0, it will be set 0.'],
+            'wait_server_seconds': [1, 'If you specify a wait_server_seconds that greater than 0, sleep() will sleep for wait_server_seconds. When wait_server_seconds less than or equal than 0, it will be set 0.'],
             'backoff_factor': [3, 'A backoff factor to apply between attempts after the second try (most errors are resolved immediately by a second try without a delay). urllib3 will sleep for: {backoff factor} * (2 ** ({number of total retries} - 1)) seconds. If the backoff_factor is 0.1, then sleep() will sleep for [0.0s, 0.2s, 0.4s, …] between retries. It will never be longer than 120s.'],
             'target_fsize': [10, 'All files that size is less than target_fsize could be cached.']
         }

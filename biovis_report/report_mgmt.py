@@ -130,7 +130,7 @@ class Context:
         }
 
         self.plugin_context = {
-            "wait_server_seconds": 5,
+            "wait_server_seconds": 1,
             "backoff_factor": 3,
             "protocol": "http",
             "domain": "127.0.0.1",

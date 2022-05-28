@@ -14,3 +14,7 @@ article>p {
 .md-source-file {
   font-size: 1rem;
 }
+
+.md-grid {
+  max-width: 90%; 
+}
