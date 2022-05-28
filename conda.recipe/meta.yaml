@@ -1,6 +1,6 @@
 {% set data = load_setup_py_data() %}
 # {% set version = '0.4.00' %}
-# {% set url = 'https://github.com/biovis-report/biovis-report-core' %}
+# {% set url = 'https://github.com/biovis-report/biovis-report' %}
 # {% set description = 'BioVisReport is a tool for generating a scientifically interactive report.' %}
 
 package:
