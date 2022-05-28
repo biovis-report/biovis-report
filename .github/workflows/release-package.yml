@@ -24,8 +24,8 @@ jobs:
       id: step1
       uses: fdiblen/anaconda-action@0.1.7
       with:
-        envFileName: './conda.recipe/meta.yml'
+        env-file-name: './conda.recipe/meta.yml'
         publish: true
         channels: conda-forge,bioconda
-        publishChannel: biovis-report
-        anacondaToken: ${{ secrets.ANACONDA_TOKEN }}
+        publish-channel: biovis-report
+        anaconda-token: ${{ secrets.ANACONDA_TOKEN }}
