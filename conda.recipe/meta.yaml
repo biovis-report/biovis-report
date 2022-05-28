@@ -26,9 +26,9 @@ requirements:
   run:
     - python {{ python }}
     - Jinja2 ~=2.11
-    - markupsafe ~=2.0
+    - markupsafe ~=2.0.1
     - PyYAML ~=6.0
-    - toml  ~=0.10
+    - toml ~=0.10
     - verboselogs ~=1.7
     - psutil ~=5.9
     - coloredlogs ~=15.0
