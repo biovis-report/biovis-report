@@ -26,7 +26,7 @@ To familiarize you with biovis-reports and how to write a report, let's reproduc
 ></iframe>
 
 !!! note
-    BioVis requires Python 3.7+, R 3.6.3+, and a set of R/Python/JavaScript packages to be loaded in your environment in order for full functionality to work. For more easier to install all the depedencies, we choose the miniconda (you can also use anaconda).
+    BioVis requires Python 3.7+, R 3.6.3+, and a set of R/Python/JavaScript packages to be loaded in your environment in order for full functionality to work. For easier to install all the depedencies, we choose the miniconda (you can also use anaconda).
 
 ### Step 1: Install miniconda
 

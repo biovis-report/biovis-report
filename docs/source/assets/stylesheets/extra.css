@@ -18,3 +18,11 @@ article>p {
 .md-grid {
   max-width: 90%; 
 }
+
+.plugin-grid {
+  text-align: center;
+}
+
+.plugin-grid .col {
+  margin-bottom: 30px;
+}
