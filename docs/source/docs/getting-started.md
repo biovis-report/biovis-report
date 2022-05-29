@@ -37,7 +37,7 @@ To install miniconda, click the `Download Link` to download the miniconda packag
 | For MacOSX (Intel)    | Miniconda3-latest-MacOSX-x86_64.pkg  | <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.pkg">Download</a>  |   <a href="/docs/installation/mac/#miniconda">Step by Step Guide</>   |
 | For MacOSX (Apple M1) |  Miniconda3-latest-MacOSX-arm64.pkg  |  <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.pkg">Download</a>  |   <a href="/docs/installation/mac/#miniconda">Step by Step Guide</>   |
 | For Windows           | Miniconda3-latest-Windows-x86_64.exe | <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe">Download</a> | <a href="/docs/installation/windows/#miniconda">Step by Step Guide</> |
-| For Linux             |  Miniconda3-latest-Linux-x86_64.sh   |  <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"> Download</a>  | <a href="https://ostechnix.com/how-to-install-miniconda-in-linux/">Step by Step Guide</a>  |
+| For Linux             |  Miniconda3-latest-Linux-x86_64.sh   |  <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"> Download</a>  | <a href="https://ostechnix.com/how-to-install-miniconda-in-linux/" target="_blank">Step by Step Guide</a>  |
 
 For more details, see the [Miniconda Guide](https://docs.conda.io/en/latest/miniconda.html).
 
@@ -52,6 +52,24 @@ conda create --channel biovis-report --channel conda-forge --name biovis-report 
 # After the previous command is finished, you need to activate the biovis-report environment
 conda activate biovis-report
 ```
+
+!!! note "Too slow?"
+    Mamba is a re-implementation of the Conda package manager, designed to be: 
+    Fast.
+    
+    Backwards compatible, with the same command-line options.
+    
+    Eventually, add more features.
+
+    ```
+    # Install mamba
+    conda install mamba
+
+    # Use mamba instead of conda, e.g.
+    conda create --channel biovis-report --channel conda-forge --name biovis-report biovis-report
+    # is equal to
+    mamba create --channel biovis-report --channel conda-forge --name biovis-report biovis-report
+    ```
 
 ### Step 3: Install a set of scientific visualization plugins
 

@@ -69,6 +69,8 @@ nav:
   - 'Getting Started':
     - 'Installation': docs/getting-started.md
     - 'For Mac Users': docs/installation/mac.md
+    - 'For Window Users': docs/installation/windows.md
+    - 'For Linux Users': docs/installation/linux.md
   - 'Design': docs/biovis-report.md
   - 'Plugins':
     - 'Introduction': docs/plugins.md
