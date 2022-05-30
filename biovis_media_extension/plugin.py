@@ -66,10 +66,7 @@ class BasePlugin:
 
     :Examples:
     1. render mode
-    2. bokeh static mode
-    3. plotly static mode
-    4. server mode
-    5. multiqc mode
+    2. server mode
     """
 
     def __init__(self, *args, **kwargs):
@@ -679,12 +676,6 @@ class BasePlugin:
                              "Output in %s.\n" % (self.plugin_name, plugin.access_url))
             return plugin.access_url
 
-    def bokeh(self):
-        pass
-
-    def plotly(self):
-        pass
-
     def update_context(self, **kwargs):
         new_context = {}
         for key, value in kwargs.items():
@@ -807,73 +798,6 @@ class BasePlugin:
         self.logger.info("Js fucntion's arguments(%s): %s" % (func_name, func_args))
         return codes
 
-    def _transform(self, bokeh_plot=None, plotly_plot=None):
-        """
-        The second stage: It's necessary for some plugins to transform data or render plugin template before generating javascript code. May be you want to reimplement transform method when you have a new plugin that is not a plotly or bokeh plugin. If the plugin is a plotly or bokeh plugin, you need to reimplement plotly method or bokeh method, not transform method. (transform, save and index transformed data file.)
-
-        :return: the path of transformed file.
-        """
-        def index_files(filename_lst):
-            file_lst = [os.path.join(os.path.dirname(__file__), 'static', 'bokeh', filename)
-                        for filename in filename_lst]
-            js = self._get_index_lst(file_lst, 'js')
-            # TODO: async加速?
-            js_lst = []
-            for item in js:
-                self.set_index(item.get('key'), item.get('value'), item.get('type'))
-                js_lst.append(self.get_net_path(item.get('key')))
-            return js_lst
-
-        # Only support bokeh in the current version.
-        from bokeh.plotting.figure import Figure as bokehFigure
-        from plotly.graph_objs import Figure as plotlyFigure
-        if isinstance(bokeh_plot, bokehFigure):
-            from bokeh.resources import CDN
-            from bokeh.embed import autoload_static
-
-            # Temporary directory
-            dest_dir = self._get_dest_dir('js')
-            plot_js_path = os.path.join(dest_dir, 'bokeh.js')
-
-            # TODO: How to cache bokeh js?
-            # js_files = ['bokeh-1.0.4.min.js', 'bokeh-gl-1.0.4.min.js', 'bokeh-tables-1.0.4.min.js',
-            #             'bokeh-widgets-1.0.4.min.js']
-            # js_resources = index_files(js_files)
-
-            # URL
-            virtual_path = self._get_virtual_path(plot_js_path)
-            plot_js, js_tag = autoload_static(bokeh_plot, CDN, virtual_path)
-
-            self.logger.debug('Bokeh js tag: %s' % js_tag)
-            with open(plot_js_path, 'w') as f:
-                f.write(plot_js)
-                self.set_index('bokeh_js', plot_js_path, ftype='js')
-                net_path = self.get_net_path('bokeh_js')
-
-                self.logger.debug('index_db: %s, net_path: %s, virtual_path: %s' %
-                                  (self._index_db, net_path, virtual_path))
-                if net_path == virtual_path:
-                    return [js_tag, ]
-                else:
-                    raise Exception('virtual_path(%s) and net_path(%s) are wrong.' % (virtual_path, net_path))
-        elif isinstance(plotly_plot, plotlyFigure):
-            from plotly.offline import plot, get_plotlyjs
-            # Temporary directory
-            dest_dir = self._get_dest_dir('js')
-            plot_js_path = os.path.join(dest_dir, 'bokeh.js')
-            plotly_js = get_plotlyjs()
-
-            with open(plot_js_path, 'w') as f:
-                f.write(plotly_js)
-                self.set_index('plotly_js', plot_js_path, ftype='js')
-                net_path = self.get_net_path('plotly_js')
-                js_code = '<script type="text/javascript" src="%s"></script>' % net_path
-
-                self.logger.debug('Plotlyjs: %s' % js_code)
-                plot_div = plot(plotly_plot, output_type='div', include_plotlyjs=False)
-                self.logger.debug('Plotly Object Js Code: %s' % js_code)
-                return [js_code, plot_div, ]
-
     def render(self, **kwargs):
         """
         The third stage: rendering javascript snippet. The js code will inject into markdown file, and then build as html file.
@@ -944,19 +868,7 @@ class BasePlugin:
         """
         Unpack context into keyword arguments of render method.
         """
-        bokeh_plot = self.bokeh()
-        plotly_plot = self.plotly()  # noqa
-        if bokeh_plot or plotly_plot:
-            rendered_lst = self._transform(bokeh_plot=bokeh_plot, plotly_plot=plotly_plot)
-            rendered_lst = self._rendered_js + rendered_lst
-            if not isinstance(rendered_lst, list):
-                raise NotImplementedError('Plugin does not yet support plotly framework.')
-
-            if self.enable_iframe:
-                iframe = self._gen_iframe(rendered_lst)
-                rendered_lst = [iframe, ]
-
-        elif self.is_server:
+        if self.is_server:
             access_url, workdir, status = self._launch_server_plugin()
 
             if workdir:

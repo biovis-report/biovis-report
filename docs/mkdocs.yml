@@ -72,6 +72,7 @@ nav:
   - 'Home': index.md
   - 'Getting Started':
     - 'Installation': docs/getting-started.md
+    - 'Write Your Report': docs/write-your-report.md
     - 'For Mac Users': docs/installation/mac.md
     - 'For Window Users': docs/installation/windows.md
     - 'For Linux Users': docs/installation/linux.md

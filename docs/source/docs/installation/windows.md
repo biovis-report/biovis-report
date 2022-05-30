@@ -75,3 +75,7 @@ Leave the "learn more" boxes checked, or un-check them, as you prefer, and click
 <figure markdown>
   ![windows_6](/assets/images/installation/windows_6.png){ width="100%" }
 </figure>
+
+### 7. Open the Anaconda Powershell Prompt (miniconda3)
+
+Click the menu -> Anaconda3 (64-bit) -> Anaconda Powershell Prompt (miniconda3)

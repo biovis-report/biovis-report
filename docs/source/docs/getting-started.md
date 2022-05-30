@@ -30,6 +30,8 @@ To familiarize you with biovis-reports and how to write a report, let's reproduc
 
 ### Step 1: Install miniconda
 
+> If you have installed miniconda or anaconda, please skip the step 1.
+
 To install miniconda, click the `Download Link` to download the miniconda package and install it.
 
 | Platform              |              File Name               |                                          Download Link                                          |                             More Details                              |
@@ -45,6 +47,8 @@ For more details, see the [Miniconda Guide](https://docs.conda.io/en/latest/mini
 
 Open your terminal and run the following command.
 
+> Don't install these packages in existing conda environments (they may disturb your environment). Please use `conda create` command to create a new conda environment for the biovis-report.
+
 ```
 # All related dependencies are located in the biovis-report and conda-forge channel, so you need to specify the two channels.
 conda create --channel biovis-report --channel conda-forge --name biovis-report biovis-report
@@ -55,6 +59,7 @@ conda activate biovis-report
 
 !!! note "Too slow?"
     Mamba is a re-implementation of the Conda package manager, designed to be: 
+    
     Fast.
     
     Backwards compatible, with the same command-line options.
