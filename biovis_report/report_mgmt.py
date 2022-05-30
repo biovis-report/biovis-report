@@ -185,7 +185,7 @@ class Context:
     def set_edit_uri(self):
         repo_url = self._context["repo_url"]
         docs_dir = os.path.basename(self._context["docs_dir"])
-        self._context["edit_uri"] = os.path.join(repo_url, docs_dir)
+        self._context["edit_uri"] = os.path.join(repo_url, "edit/master", docs_dir)
 
     def set_site_name(self, site_name):
         if site_name:
