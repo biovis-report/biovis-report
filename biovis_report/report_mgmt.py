@@ -16,6 +16,7 @@ import logging
 import re
 import os
 import sys
+import platform
 import yaml
 import verboselogs
 from os.path import join as join_path
@@ -25,6 +26,13 @@ from biovis_report.utils import get_copyright, get_resource_dir, copy_and_overwr
 
 logging.setLoggerClass(verboselogs.VerboseLogger)
 logger = logging.getLogger(__name__)
+
+sysstr = platform.system()
+SEPARATOR = '/'
+if(sysstr == "Windows"):
+    SEPARATOR = '\\'
+else:
+    SEPARATOR = '/'
 
 # Any app report MUST have these template files.
 BASED_TEMPLATE_FILES = [
@@ -48,7 +56,7 @@ def find_extra_templ_files(template_dir):
             if re.match(r".*.(md|markdown)$", filename):
                 file_path = join_path(root, filename)
                 # Muse be no prefix in template file path
-                template = file_path.replace(template_dir, "").strip("/")
+                template = file_path.replace(template_dir, "").strip(SEPARATOR)
                 template_files.append(template)
     diff_sets = list(set(template_files) - set(BASED_TEMPLATE_FILES))
     return diff_sets
@@ -241,7 +249,7 @@ class Context:
 
         for item in extra_files:
             # Use the name of the first level directory as key
-            keyname = item.strip("/").split("/")[0]
+            keyname = item.strip(SEPARATOR).split(SEPARATOR)[0]
             # Get file name as key when it is a single file
             if re.match(r".*.(md|markdown|Md|Markdown)$", keyname):
                 key = get_basename(keyname)
@@ -250,7 +258,7 @@ class Context:
 
             basename = get_basename(os.path.basename(item))
 
-            file_path = item.replace(strip_pattern, "").strip("/")
+            file_path = item.replace(strip_pattern, "").strip(SEPARATOR)
             index = next((index for (index, d) in enumerate(self._context["report_menu"])
                           if d["key"] == key), None)
             if index is not None:
