@@ -1,4 +1,5 @@
 import os
+import sys
 import logging
 import shutil
 import tempfile
@@ -146,7 +147,8 @@ def serve(config_file=None, dev_addr=None, strict=None, theme=None, site_dir=Non
             # It will cause mkdocs.exceptions.Abort: FileNotFoundError: [Errno 2] No such file or directory
             if not os.path.isdir(site_dir):
                 os.makedirs(site_dir)
-            os.symlink(docs_dir, markdown_link)
+            if sys.platform == 'darwin' or sys.platform == 'linux':
+                os.symlink(docs_dir, markdown_link)
 
         # combine CLI watch arguments with config file values
         if config["watch"] is None:

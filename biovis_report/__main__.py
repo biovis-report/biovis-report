@@ -79,7 +79,7 @@ def call_report(args):
                         % (project_dir, report_dir))
 
     # All are False or all are True
-    editable = mode == 'livereload'
+    editable = mode == 'livereload' and (sys.platform == 'darwin' or sys.platform == 'linux')
 
     build_report(report_dir, project_dir, repo_url=repo_url, site_description=site_description,
                  site_author=site_author, site_name=site_name, mode=mode, dev_addr=dev_addr,
