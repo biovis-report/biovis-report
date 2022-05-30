@@ -182,6 +182,11 @@ class Context:
         if repo_url:
             self._context["repo_url"] = repo_url
 
+    def set_edit_uri(self):
+        repo_url = self._context["repo_url"]
+        docs_dir = os.path.basename(self._context["docs_dir"])
+        self._context["edit_uri"] = os.path.join(repo_url, docs_dir)
+
     def set_site_name(self, site_name):
         if site_name:
             self._context["site_name"] = site_name
@@ -321,6 +326,7 @@ class Context:
             if hasattr(self, method) and kwargs.get(key):
                 getattr(self, method)(kwargs.get(key))
 
+        self.set_edit_uri()
         self.set_extra_css_lst(extra_css_lst)
         self.set_extra_js_lst(extra_js_lst)
         self.logger.debug("Report Context(extra context medata): %s" % str(self._context))
