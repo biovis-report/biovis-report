@@ -24,5 +24,17 @@ article>p {
 }
 
 .plugin-grid .col {
+  padding: 10px;
   margin-bottom: 30px;
+}
+
+.plugin-grid .inner {
+  padding: 10px;
+  border: 1.5px solid #cccccc;
+  border-radius: 5px;
+}
+
+.plugin-grid img {
+  height: 400px;
+  margin: 0px auto;
 }
