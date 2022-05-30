@@ -975,7 +975,7 @@ class BasePlugin:
                     backoff_factor=self.backoff_factor
                 ).get(access_url, timeout=10)
             except Exception as err:
-                self.logger.debug('Try to launch plugin server: %s' % str(err))
+                self.logger.info('Try to launch plugin server: %s' % str(err))
                 rendered_lst = self.get_error_log(logfile=logfile)
             else:
                 if response.status_code == 200:

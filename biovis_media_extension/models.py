@@ -31,7 +31,7 @@ def init_db(plugin_db):
     # Create an engine that stores data in the local directory's
     # sqlalchemy_example.db file.
     check_dir(os.path.dirname(plugin_db), skip=True)
-    engine = create_engine('sqlite:///%s' % plugin_db)
+    engine = create_engine('sqlite:///%s?check_same_thread=False' % plugin_db)
 
     # Create all tables in the engine. This is equivalent to "Create Table"
     # statements in raw SQL.

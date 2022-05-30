@@ -16,11 +16,11 @@
             "type": "boolean"
         },
         "wait_server_seconds": {
-            "type": "integer",
+            "type": "number",
             "minimum": 0
         },
         "backoff_factor": {
-            "type": "integer",
+            "type": "number",
             "minimum": 0
         },
         "target_fsize": {
