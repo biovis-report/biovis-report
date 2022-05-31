@@ -13,6 +13,10 @@ Please see the <a href="/docs/plugins/" target="_blank">plugins</a> for a full p
 
 ## Run an Example
 
+!!! note
+
+    Therefore, the current version of BioVisReport does not support Windows because we cannot make all plugins work properly on Windows. We consider to support Windows in next version. We're very sorry for the inconvenience.
+
 To familiarize you with biovis-reports and how to write a report, let's reproduce a example report together (as shown in the video below).
 
 <iframe
@@ -38,7 +42,7 @@ To install miniconda, click the `Download Link` to download the miniconda packag
 | --------------------- | :----------------------------------: | :---------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------: |
 | For MacOSX (Intel)    | Miniconda3-latest-MacOSX-x86_64.pkg  | <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.pkg">Download</a>  |   <a href="/docs/installation/mac/#miniconda">Step by Step Guide</>   |
 | For MacOSX (Apple M1) |  Miniconda3-latest-MacOSX-arm64.pkg  |  <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.pkg">Download</a>  |   <a href="/docs/installation/mac/#miniconda">Step by Step Guide</>   |
-| For Windows           | Miniconda3-latest-Windows-x86_64.exe | <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe">Download</a> | <a href="/docs/installation/windows/#miniconda">Step by Step Guide</> |
+| For Windows           | Miniconda3-latest-Windows-x86_64.exe | <a disabled href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe">Download</a> | <a disabled href="/docs/installation/windows/#miniconda">Step by Step Guide</> |
 | For Linux             |  Miniconda3-latest-Linux-x86_64.sh   |  <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"> Download</a>  | <a href="https://ostechnix.com/how-to-install-miniconda-in-linux/" target="_blank">Step by Step Guide</a>  |
 
 For more details, see the [Miniconda Guide](https://docs.conda.io/en/latest/miniconda.html).

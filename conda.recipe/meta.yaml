@@ -39,6 +39,10 @@ requirements:
     - Markdown ~=3.3
     - sqlalchemy ~=1.4
     - mkdocs ~=1.2
+    - mkdocs-material ~=8.2
+    - mkdocs-material-extensions ~=1.0
+    - pygments ~=2.12
+    - pymdown-extensions ~=9.4
 
 test:
   commands:

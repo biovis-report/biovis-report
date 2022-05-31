@@ -51,13 +51,8 @@ markdown_extensions:
     - pymdownx.superfences
     - pymdownx.inlinehilite:
         style_plain_text: True
-    {% if context.theme_name == 'material' -%}
     - pymdownx.details
     - pymdownx.snippets
-    - pymdownx.emoji:
-        emoji_index: !!python/name:materialx.emoji.twemoji
-        emoji_generator: !!python/name:materialx.emoji.to_svg
-    {%- endif %}
     {% if context.enable_media_extension -%}
     - biovis_media_extension:
         net_dir: {{ context.plugin_dir }}

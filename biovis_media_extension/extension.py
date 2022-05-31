@@ -224,7 +224,7 @@ class BioVisPluginPreprocessor(Preprocessor):
         self.backoff_factor = config.get('backoff_factor', 3)
 
         if self.net_dir is None:
-            color_msg = BashColors.get_color_msg('WARNING', "biovis_media_extension's kwarg net_dir is not set, so it will be instead by qiniu url.")
+            color_msg = BashColors.get_color_msg('WARNING', "biovis_media_extension's kwarg net_dir is not set.")
             self.logger.warning(color_msg)
 
     def run(self, lines):
@@ -278,24 +278,14 @@ class BioVisPluginPreprocessor(Preprocessor):
 class BioVisPluginExtension(Extension):
     def __init__(self, **kwargs):
         self.config = {
-            'net_dir': [None, 'A directory which is used as html directory.'],
-            'protocol': ['http', 'Http protocol'],
-            'domain': ['127.0.0.1', 'Domain for plugin server'],
-            'enable_iframe': [True, 'Enable to generate iframe for all plugins'],
-            'wait_server_seconds': [1, 'If you specify a wait_server_seconds that greater than 0, sleep() will sleep for wait_server_seconds. When wait_server_seconds less than or equal than 0, it will be set 0.'],
-            'backoff_factor': [3, 'A backoff factor to apply between attempts after the second try (most errors are resolved immediately by a second try without a delay). urllib3 will sleep for: {backoff factor} * (2 ** ({number of total retries} - 1)) seconds. If the backoff_factor is 0.1, then sleep() will sleep for [0.0s, 0.2s, 0.4s, …] between retries. It will never be longer than 120s.'],
-            'target_fsize': [10, 'All files that size is less than target_fsize could be cached.']
+            'net_dir': [kwargs.get('net_dir', None), 'A directory which is used as html directory.'],
+            'protocol': [kwargs.get('protocol', 'http'), 'Http protocol'],
+            'domain': [kwargs.get('domain', '127.0.0.1'), 'Domain for plugin server'],
+            'enable_iframe': [kwargs.get('enable_iframe', True), 'Enable to generate iframe for all plugins'],
+            'wait_server_seconds': [kwargs.get('wait_server_seconds', 1), 'If you specify a wait_server_seconds that greater than 0, sleep() will sleep for wait_server_seconds. When wait_server_seconds less than or equal than 0, it will be set 0.'],
+            'backoff_factor': [kwargs.get('backoff_factor', 3), 'A backoff factor to apply between attempts after the second try (most errors are resolved immediately by a second try without a delay). urllib3 will sleep for: {backoff factor} * (2 ** ({number of total retries} - 1)) seconds. If the backoff_factor is 0.1, then sleep() will sleep for [0.0s, 0.2s, 0.4s, …] between retries. It will never be longer than 120s.'],
+            'target_fsize': [kwargs.get('target_fsize', 10), 'All files that size is less than target_fsize could be cached.']
         }
-
-        self.config.update({
-            'net_dir': [kwargs.get('net_dir'), 'a directory which is used as html directory.'],
-            'protocol': [kwargs.get('protocol'), 'Http protocol'],
-            'domain': [kwargs.get('domain'), 'Domain for plugin server'],
-            'enable_iframe': [kwargs.get('enable_iframe'), 'Enable to generate iframe for all plugins'],
-            'wait_server_seconds': [kwargs.get('wait_server_seconds'), 'If you specify a wait_server_seconds that greater than 0, sleep() will sleep for wait_server_seconds. When wait_server_seconds less than or equal than 0, it will be set 0.'],
-            'backoff_factor': [kwargs.get('backoff_factor'), 'A backoff factor to apply between attempts after the second try (most errors are resolved immediately by a second try without a delay). urllib3 will sleep for: {backoff factor} * (2 ** ({number of total retries} - 1)) seconds. If the backoff_factor is 0.1, then sleep() will sleep for [0.0s, 0.2s, 0.4s, …] between retries. It will never be longer than 120s.'],
-            'target_fsize': [kwargs.get('target_fsize') or 10, 'All files that size is less than target_fsize could be cached.']
-        })
 
     def extendMarkdown(self, md, md_globals):
         md.registerExtension(self)
