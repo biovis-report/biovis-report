@@ -109,7 +109,7 @@ All plugins are divided into three plugin packages depending on the development 
         </div>
     </div>
 
-    <div class="col">
+    <!-- <div class="col">
         <div class="inner">
             <a href="/docs/plugins/r-based/lollipop-plot-r/">
                 <img src="/assets/images/plugins/lollipop-plot-r.png" />
@@ -119,7 +119,7 @@ All plugins are divided into three plugin packages depending on the development 
             <br />
             Interactive lollipop plot visualization from a Shiny app
         </div>
-    </div>
+    </div> -->
 
     <div class="col">
         <div class="inner">
@@ -208,7 +208,7 @@ All plugins are divided into three plugin packages depending on the development 
     <div class="col">
         <div class="inner">
             <a href="/docs/plugins/js-based/pie-chart-js/">
-                <img src="/assets/images/plugins/pie-chart-js.png" style="height: 300px;" />
+                <img src="/assets/images/plugins/pie-chart-js.png" />
                 <br />
                 pie-chart-js
             </a>
@@ -220,7 +220,7 @@ All plugins are divided into three plugin packages depending on the development 
     <div class="col">
         <div class="inner">
             <a href="/docs/plugins/js-based/pivot-table-js/">
-                <img src="/assets/images/plugins/pivot-table-js.png" style="height: 300px;" />
+                <img src="/assets/images/plugins/pivot-table-js.png" />
                 <br />
                 pivot-table-js
             </a>

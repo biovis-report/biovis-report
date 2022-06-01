@@ -1,0 +1,10 @@
+name: biovis-report
+channels:
+  - biovis-report
+  - defaults
+  - conda-forge
+  - bioconda
+dependencies:
+  - biovis-jsbased-plugins~=0.5
+  - biovis-rbased-plugins~=0.5
+  - biovis-report~=0.5

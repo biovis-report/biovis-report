@@ -71,11 +71,14 @@ theme:
 nav:
   - 'Home': index.md
   - 'Getting Started':
-    - 'Installation': docs/getting-started.md
+    - 'Introduction': docs/getting-started.md
+    - 'Installation': docs/installation.md
+    - 'Launch the Example': docs/launch-example.md
     - 'Write Your Report': docs/write-your-report.md
-    - 'For Mac Users': docs/installation/mac.md
-    - 'For Window Users': docs/installation/windows.md
-    - 'For Linux Users': docs/installation/linux.md
+    - 'Publish Your Report': docs/publish-your-report.md
+    # - 'For Mac Users': docs/installation/mac.md
+    # - 'For Window Users': docs/installation/windows.md
+    # - 'For Linux Users': docs/installation/linux.md
   - 'Design': docs/biovis-report.md
   - 'Plugins':
     - 'Introduction': docs/plugins.md
