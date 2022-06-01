@@ -4,6 +4,7 @@ domain = "127.0.0.1"
 enable_iframe = true
 wait_server_seconds = 1
 backoff_factor = 3
+mode = "build"
 
 [report]
 repo_url = "http://biovis.report"

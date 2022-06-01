@@ -9,6 +9,14 @@
                 "https"
             ]
         },
+        "mode": {
+            "type": "string",
+            "enum": [
+                "build",
+                "livereload",
+                "server"
+            ]
+        },
         "domain": {
             "type": "string"
         },

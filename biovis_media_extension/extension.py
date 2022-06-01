@@ -18,7 +18,7 @@ class Code:
     Parse plugin call code and execute it.
     """
 
-    def __init__(self, code, net_dir, sync_oss=True, sync_http=True,
+    def __init__(self, code, net_dir, mode, sync_oss=True, sync_http=True,
                  sync_ftp=True, target_fsize=10, protocol='http',
                  domain='127.0.0.1', enable_iframe=True,
                  wait_server_seconds=1, backoff_factor=3):
@@ -43,6 +43,7 @@ class Code:
         self.enable_iframe = enable_iframe
         self.wait_server_seconds = wait_server_seconds
         self.backoff_factor = backoff_factor
+        self.mode=mode
 
     def load_convertor(self, name, context):
         if name not in self.installed_convertors:
@@ -66,7 +67,8 @@ class Code:
                                     sync_ftp=self.sync_ftp, protocol=self.protocol, domain=self.domain,
                                     enable_iframe=self.enable_iframe,
                                     wait_server_seconds=self.wait_server_seconds,
-                                    backoff_factor=self.backoff_factor)
+                                    backoff_factor=self.backoff_factor,
+                                    mode=self.mode)
         else:
             if name not in self.installed_plugins:
                 raise ValidationError('The "{0}" plugin is not installed'.format(name))
@@ -83,7 +85,8 @@ class Code:
                             sync_ftp=self.sync_ftp, protocol=self.protocol, domain=self.domain,
                             enable_iframe=self.enable_iframe,
                             wait_server_seconds=self.wait_server_seconds,
-                            backoff_factor=self.backoff_factor)
+                            backoff_factor=self.backoff_factor,
+                            mode=self.mode)
         return plugin
 
     def _parse(self):
@@ -212,6 +215,7 @@ class BioVisPluginPreprocessor(Preprocessor):
     def __init__(self, md, config):
         super(BioVisPluginPreprocessor, self).__init__(md)
         self.logger = logging.getLogger(__name__)
+        self.mode = config.get('mode', 'build')
         self.net_dir = config.get('net_dir', None)
         self.target_fsize = config.get('target_fsize', 10)
         self.sync_oss = config.get('sync_oss', True)
@@ -242,7 +246,7 @@ class BioVisPluginPreprocessor(Preprocessor):
                 block.append(striped_line)
                 code_str = re.sub(r'\s', '', ''.join(block))
                 # Parse plugin call code, and then call plugin.
-                code_instance = Code(code_str, self.net_dir, target_fsize=self.target_fsize,
+                code_instance = Code(code_str, self.net_dir, self.mode, target_fsize=self.target_fsize,
                                      sync_oss=self.sync_oss, sync_http=self.sync_http, sync_ftp=self.sync_ftp, protocol=self.protocol, domain=self.domain,
                                      enable_iframe=self.enable_iframe,
                                      wait_server_seconds=self.wait_server_seconds,
@@ -279,6 +283,7 @@ class BioVisPluginExtension(Extension):
     def __init__(self, **kwargs):
         self.config = {
             'net_dir': [kwargs.get('net_dir', None), 'A directory which is used as html directory.'],
+            'mode': [kwargs.get('mode', 'build'), 'Which mode for your report. (build, server or livereload)'],
             'protocol': [kwargs.get('protocol', 'http'), 'Http protocol'],
             'domain': [kwargs.get('domain', '127.0.0.1'), 'Domain for plugin server'],
             'enable_iframe': [kwargs.get('enable_iframe', True), 'Enable to generate iframe for all plugins'],

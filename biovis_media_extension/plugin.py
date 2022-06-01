@@ -81,6 +81,7 @@ class BasePlugin:
         :param: file_size: file size(MB).
         """
         print("BasePlugin: %s, %s" % (str(args), str(kwargs)))
+        self.mode = kwargs.get('mode', 'build')  # build, livereload, server
         self.net_dir = kwargs.get('net_dir', None)
         self.sync_oss = kwargs.get('sync_oss', True)
         self.sync_http = kwargs.get('sync_http', True)
@@ -97,18 +98,16 @@ class BasePlugin:
         self._context = kwargs.get('context', {})
 
         self.logger = logging.getLogger('biovis.biovis-media-extension.plugin')
-        if self.net_dir:
-            temp_dir = os.path.join(self.net_dir, '.biovis-media-extension')
-        else:
-            temp_dir = os.path.join('/tmp', 'biovis-media-extension')
-            self.logger.warn("No net_dir, so use temp directory(%s)." % temp_dir)
+        if not self.net_dir:
+            self.net_dir = '/tmp'
+            self.logger.error("No net_dir, so use temp directory(%s)." % self.net_dir)
             # Clean up the temp directory
             # TODO: rmtree will cause other biovis process failed, how to solve it?
-            shutil.rmtree(temp_dir, ignore_errors=True)
+            shutil.rmtree(self.net_dir, ignore_errors=True)
 
-        self.plugin_db = os.path.join(temp_dir, 'plugin.db')
-
-        self.tmp_plugin_dir = os.path.join(temp_dir, str(uuid.uuid1()))
+        self.plugin_db = os.path.join(self.net_dir, '.biovis-media-extension', 'plugin.db')
+        self.plugin_root_dir = os.path.join('.biovis-media-extension', str(uuid.uuid1()))
+        self.tmp_plugin_dir = os.path.join(self.net_dir, self.plugin_root_dir)
         # Fix bug: use plugin name as global dir name instead of random file name
         #          for saving all files from a plugin.
         self.plugin_data_dir = os.path.join(self.tmp_plugin_dir, self.plugin_name)
@@ -691,13 +690,32 @@ class BasePlugin:
         if self.is_server:
             if self.plugin_dir:
                 src_code_dir = os.path.join(self.plugin_dir, self.plugin_name)
-                process = Process(command_dir=src_code_dir, workdir=self.tmp_plugin_dir)
-                port = find_free_port()
+                random_plugin_name = '%s_%s' % (self.plugin_name, get_candidate_name())
+                plugin_dir = os.path.join(self.tmp_plugin_dir, random_plugin_name)
+
+                process = Process(command_dir=src_code_dir, workdir=plugin_dir)
+                
+                # For Shiny Server, all shiny app need to located in root directory.
+                # dest_plugin_dir must be a relative directory
+                src_plugin_dir = os.path.join(self.plugin_root_dir, random_plugin_name)
+                
+                cwd = os.getcwd()
+                os.chdir(self.net_dir)
+                os.symlink(src_plugin_dir, random_plugin_name)
+                os.chdir(cwd)
+                
                 updated_context = self.update_context(**self.context)
-                process_id = process.run_command(domain=self.domain, port=port, **updated_context)
-                access_url = '{protocol}://{domain}:{port}'.format(protocol=self.protocol,
-                                                                   domain=self.domain,
-                                                                   port=port)
+
+                if self.mode != 'build':
+                    port = find_free_port()
+                    process_id = process.run_command(domain=self.domain, port=port, **updated_context)
+                    access_url = '{protocol}://{domain}:{port}'.format(protocol=self.protocol,
+                                                                    domain=self.domain,
+                                                                    port=port)
+                else:
+                    # In build mode, no process is launched, so return -1.
+                    process_id = process.build(**updated_context)
+                    access_url = '/%s/' % random_plugin_name
                 return process_id, access_url, process.workdir
             else:
                 return None, None, None
@@ -728,7 +746,7 @@ class BasePlugin:
 
             if access_url:
                 add_plugin(**metadata, plugin_db=self.plugin_db)
-            self.logger.info("Launching plugin server(%s) successfully, Serving on %s.\n" % (self.plugin_name, access_url))
+            self.logger.info("Try to Launch plugin server(%s), Serving on %s.\n" % (self.plugin_name, access_url))
             return access_url, workdir, 'new'
         else:
             self.logger.info("Command doesn't changed, so skip it.")
@@ -882,15 +900,20 @@ class BasePlugin:
                 wait_server_seconds = self.wait_server_seconds
 
             try:
-                response = requests_retry_session(
-                    delay=wait_server_seconds,
-                    backoff_factor=self.backoff_factor
-                ).get(access_url, timeout=10)
+                if self.mode != 'build':
+                    response = requests_retry_session(
+                        delay=wait_server_seconds,
+                        backoff_factor=self.backoff_factor
+                    ).get(access_url, timeout=10)
+                    status_code = response.status_code
+                else:
+                    # Always be successful
+                    status_code = 200
             except Exception as err:
                 self.logger.info('Try to launch plugin server: %s' % str(err))
                 rendered_lst = self.get_error_log(logfile=logfile)
             else:
-                if response.status_code == 200:
+                if status_code == 200:
                     iframe_tag = '<iframe src="{}" seamless frameborder="0" \
                                   scrolling="no" class="iframe" \
                                   name="{}" width="100%"></iframe>'

@@ -7,18 +7,15 @@ import psutil
 import signal
 import logging
 import subprocess
-from biovis_media_extension.utils import (get_candidate_name, check_dir,
-                                      copy_and_overwrite)
+from biovis_media_extension.utils import (check_dir, copy_and_overwrite)
 
 
 class Process:
     def __init__(self, command_dir=None, workdir='/tmp/', main_program_name='run.sh'):
         self.logger = logging.getLogger('biovis-media-extension.process_mgmt.Process')
         if command_dir:
+            self.workdir = workdir
             self.command_dir = command_dir
-            command_dirname = os.path.basename(command_dir)
-
-            self.workdir = os.path.join(workdir, '%s_%s' % (command_dirname, get_candidate_name()))
             self.main_program = os.path.join(self.workdir, main_program_name)
             self.logger.debug('Main program: %s' % self.main_program)
             self.logger.debug('Command directory: %s' % self.command_dir)
@@ -70,24 +67,32 @@ class Process:
     def _set_env(self):
         check_dir(self.workdir, skip=True)
         copy_and_overwrite(self.command_dir, self.workdir)
-
-    def run_command(self, domain='127.0.0.1', port='8000', **kwargs):
+        
+    def _init(self, **kwargs):
         self._set_env()
         self._gen_config(self.workdir, **kwargs)
-        self._exist_command()
+        
+    def build(self, **kwargs):
+        self._init(**kwargs)
+        return -1
 
-        if domain != '127.0.0.1' or domain != 'localhost':
-            domain = '0.0.0.0'
+    def run_command(self, domain='127.0.0.1', port='8000', **kwargs):
+        self._init(**kwargs)
+        if self._exist_command():
+            if domain != '127.0.0.1' or domain != 'localhost':
+                domain = '0.0.0.0'
+            else:
+                domain = '127.0.0.1'
+
+            shell_cmd = [self.main_program, '-d', self.workdir, '-p', str(port), '-H', domain]
+            self.logger.debug('Shell command: %s' % str(shell_cmd))
+            with open(os.path.join(self.workdir, 'log'), 'w') as logfile:
+                process = subprocess.Popen(shell_cmd, stdin=subprocess.PIPE,
+                                        stdout=logfile,
+                                        stderr=logfile)
+            return process.pid
         else:
-            domain = '127.0.0.1'
-
-        shell_cmd = [self.main_program, '-d', self.workdir, '-p', str(port), '-H', domain]
-        self.logger.debug('Shell command: %s' % str(shell_cmd))
-        with open(os.path.join(self.workdir, 'log'), 'w') as logfile:
-            process = subprocess.Popen(shell_cmd, stdin=subprocess.PIPE,
-                                       stdout=logfile,
-                                       stderr=logfile)
-        return process.pid
+            return -1
 
     def get_process(self, process_id):
         try:

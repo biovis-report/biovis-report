@@ -15,7 +15,9 @@ from __future__ import unicode_literals
 import logging
 import re
 import os
+import site
 import sys
+import shutil
 import platform
 import yaml
 import verboselogs
@@ -90,22 +92,23 @@ class Context:
     The context class maintain a context database that store metadata related with project and provide a set of manipulation functions.
     """
 
-    def __init__(self, report_dir, project_dir, editable=True,
+    def __init__(self, report_dir, site_dir, editable=True, mode='build',
                  enable_media_extension=True):
         self.logger = logging.getLogger("biovis-report.report_mgmt.Context")
 
         self.report_dir = os.path.abspath(report_dir)
-        self.project_dir = os.path.abspath(project_dir)
+        self.site_dir = os.path.abspath(site_dir)
+        project_dir = os.path.dirname(site_dir)
 
         self._context = {
             # For Mkdocs
             "enable_media_extension": enable_media_extension,
             "editable": editable,
-            "project_dir": self.project_dir,
+            "project_dir": project_dir,
             "docs_dir": self.report_dir,
             "html_dir": "report_html",
-            "plugin_dir": join_path(self.project_dir, "report_html"),
-            "project_name": os.path.basename(self.project_dir),
+            "plugin_dir": self.site_dir,
+            "project_name": os.path.basename(project_dir),
             "extra_header_js_lst": [
                 # For non iframe mode.
                 "https://cdn.biovis.report/assets/2019-03-22-load-script-0.1.3.js",
@@ -144,6 +147,7 @@ class Context:
             "domain": "127.0.0.1",
             "enable_iframe": True,
             "target_fsize": 10,
+            "mode": mode,
         }
 
         self.report_context = {
@@ -316,7 +320,8 @@ class Context:
         plugin = config.get_section('plugin', is_dict=True)
 
         for item in self.plugin_context.keys():
-            self.plugin_context[item] = plugin.get(item)
+            if plugin.get(item):
+                self.plugin_context[item] = plugin.get(item)
 
         self._context.update(self.plugin_context)
 
@@ -324,7 +329,8 @@ class Context:
         report = config.get_section('report', is_dict=True)
 
         for item in self.report_context.keys():
-            self.report_context[item] = report.get(item)
+            if report.get(item):
+                self.report_context[item] = report.get(item)
 
         self._context.update(self.report_context)
 
@@ -345,8 +351,8 @@ class Renderer:
     Report renderer class that generating a mkdocs.yaml.
     """
 
-    def __init__(self, dest_dir, ctx_instance, resource_dir=get_resource_dir()):
-        self.dest_dir = dest_dir
+    def __init__(self, project_dir, ctx_instance, resource_dir=get_resource_dir()):
+        self.dest_dir = project_dir
         self.resource_dir = resource_dir
         self.context_dict = ctx_instance.context
         self.logger = logging.getLogger("biovis-report.report_mgmt.Renderer")
@@ -370,17 +376,11 @@ class Renderer:
 
 
 class Report:
-    def __init__(self, project_dir):
-        self.project_dir = project_dir
-
-        # The directory where the output HTML and other files are created.
-        # This can either be a relative directory, in which case it is resolved
-        # relative to the directory containing your configuration file,
-        # or it can be an absolute directory path from the root of your local file system.
-        self.site_dir = os.path.abspath(join_path(self.project_dir, "report_html"))
-
-        # ${project_dir}/.mkdocs.yml
-        self.config_file = join_path(self.project_dir, ".mkdocs.yml")
+    def __init__(self, site_dir):
+        # ${site_dir}/.mkdocs.yml
+        self.site_dir = site_dir
+        project_dir = os.path.dirname(self.site_dir)
+        self.config_file = join_path(project_dir, ".mkdocs.yml")
         self.config = None
 
         self.logger = logging.getLogger("biovis-report.report_mgmt.Report")
@@ -460,13 +460,24 @@ def build(report_dir, project_dir, resource_dir=get_resource_dir(), repo_url=Non
     """
     from biovis_report.utils import check_plugin
 
+    # The directory where the output HTML and other files are created.
+    # This can either be a relative directory, in which case it is resolved
+    # relative to the directory containing your configuration file,
+    # or it can be an absolute directory path from the root of your local file system.
+    site_dir = os.path.abspath(join_path(project_dir, "report_html"))
+    if force:
+        if os.path.exists(join_path(site_dir, '.biovis-media-extension', 'plugin.db')):
+            logger.warn("Remove the project directory, because the force flag is set.")
+            shutil.rmtree(site_dir, ignore_errors=True)
+    
+    os.makedirs(site_dir)
     if enable_media_extension:
         if not check_plugin():
             sys.exit(exit_code.INVALID_DEPS)
 
     # Context: generate context metadata.
     logger.info("\n1. Generate report context.")
-    ctx_instance = Context(report_dir, project_dir, editable=editable,
+    ctx_instance = Context(report_dir, site_dir, editable=editable, mode=mode,
                            enable_media_extension=enable_media_extension)
     ctx_instance.set_extra_context(repo_url=repo_url, site_description=site_description,
                                    site_author=site_author, copyright=copyright, site_name=site_name,
@@ -480,11 +491,10 @@ def build(report_dir, project_dir, resource_dir=get_resource_dir(), repo_url=Non
     renderer.render()
     logger.success("Render config file successfully.")
 
-    report = Report(project_dir)
+    report = Report(site_dir)
     if mode == "build":
         logger.info("\n3. Build %s by biovis-report" % report_dir)
         report.build()
-        site_dir = join_path(project_dir, "report_html")
         logger.success("Build markdown files successfully. "
                        "(Files in %s)" % site_dir)
     elif mode == "livereload":

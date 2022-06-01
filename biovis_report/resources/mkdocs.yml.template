@@ -58,6 +58,7 @@ markdown_extensions:
         net_dir: {{ context.plugin_dir }}
         sync_oss: True
         sync_http: True
+        mode: {{ context.mode }}
         wait_server_seconds: {{ context.wait_server_seconds }}
         backoff_factor: {{ context.backoff_factor }}
         protocol: {{ context.protocol }}
