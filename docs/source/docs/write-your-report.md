@@ -1,7 +1,7 @@
 > How to layout and write your Markdown source files
 
 ## File layout
-Your report source file should be written as regular Markdown files (see Writing with Markdown below), and placed in the report directory. By default, this directory will be named report or whatever you like, but please keep it as short as possible without special characters, and a single word is best. And the directory will exist at the top level of your project, alongside the `LICENSE.md` and `README.md` files.
+Your report source file should be written as regular Markdown files (see Writing with Markdown below), and placed in the `report` directory. By default, this directory will be named report or whatever you like, but please keep it as short as possible without special characters, and a single word is best. And the directory will exist at the top level of your project, alongside the `LICENSE.md` and `README.md` files.
 
 The simplest project you can create will look something like this:
 
@@ -10,6 +10,8 @@ The simplest project you can create will look something like this:
 ├── LICENSE.md # Copyright notice, how other researchers can use your report source files and data
 ├── README.md  # Tell other researchers how to use your report.
 └── report
+    ├── data                                           # Your data files, you may use these files in plugins
+    │   └── tnbcexpmelt1_tp53.rds                      # Example data file. Please use your data instead of it.
     ├── index.md
 ```
 
@@ -26,6 +28,8 @@ You can also create multi-page documentation, by creating several Markdown files
 ├── LICENSE.md # Copyright notice, how other researchers can use your report source files and data
 ├── README.md  # Tell other researchers how to use your report.
 └── report
+    ├── data                                           # Your data files, you may use these files in plugins
+    │   └── tnbcexpmelt1_tp53.rds                      # Example data file.
     ├── index.md
     ├── about.md
     ├── license.md
@@ -46,6 +50,8 @@ You can also include your Markdown files in nested directories if that better su
 ├── LICENSE.md                                         # Copyright notice, how other researchers can use your report source files and data
 ├── README.md                                          # Tell other researchers how to use your report.
 └── report
+    ├── data                                           # Your data files, you may use these files in plugins
+    │   └── tnbcexpmelt1_tp53.rds                      
     ├── about
     │   └── license.md
     ├── index.md                                       # Homepage
@@ -80,15 +86,19 @@ BioVisReport uses the [Mkdocs](https://www.mkdocs.org/) and Python-Markdown libr
 
 ## Add a scientifical chart
 
-Please see the following example snippet, a grouped-boxplot-r plugin is called in the markown code. The snippet can be generated a visualization chart as following image shown.
+Please see the following example snippet, a grouped-boxplot-r plugin is called in the markown code. The snippet can be generated a visualization chart as following image shown.  
 
 ```markdown
 ### Per Gene Expression
 
 The description for gene expression matrix.
 
-@grouped-boxplot-r(dataFile='./example/data/tnbcexpmelt1_tp53.rds', dataType='rds',xAxis='Group', yAxis='Value')
+@grouped-boxplot-r(dataFile='./report/data/tnbcexpmelt1_tp53.rds', dataType='rds', xAxis='Group', yAxis='Value')
 
 ```
+
+!!! note
+
+    The `./report/data/tnbcexpmelt1_tp53.rds` is a relative path, `report` is the directory where the source files are located. Please read the [File Layout](/docs/write-your-report/#file-layout) for more details.
 
 ![Grouped Boxplot Example](/assets/images/grouped-boxplot-r-example.png)

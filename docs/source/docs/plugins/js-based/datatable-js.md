@@ -1,16 +1,10 @@
 ### ShowCase
 
-<!-- Video -->
+Click the image to view the online example.
 
-<iframe
-    width="560"
-    height="315"
-    src="https://www.youtube.com/embed/MZ1Kv75t_Mc"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-></iframe>
+<a href="https://biovis-report-example1.3steps.cn/project/clinical_data.html#clinical-data-table" target="_blank">
+    <img src="/assets/images/plugins/datatable-js.png">
+</a>
 
 ### Description
 

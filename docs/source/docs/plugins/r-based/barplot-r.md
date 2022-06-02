@@ -1,16 +1,8 @@
 ### ShowCase
 
-<!-- Video -->
+Online example will be available soon.
 
-<iframe
-    width="560"
-    height="315"
-    src="https://www.youtube.com/embed/MZ1Kv75t_Mc"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-></iframe>
+<img src="/assets/images/plugins/barplot-r.png">
 
 ### Description
 

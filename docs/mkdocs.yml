@@ -3,7 +3,7 @@ site_name: BioVisReport
 site_description: 'For Scientifically Interactive Report'
 site_author: 'Jingcheng Yang'
 announce: 'BioVisReport Team'
-announce_text: ''
+announce_text: 'biovis-report v0.5.6 is released.'
 docs_dir: source
 repo_name: 'biovis-report'
 repo_url: 'https://github.com/biovis-report'
@@ -82,16 +82,21 @@ nav:
   - 'Design': docs/biovis-report.md
   - 'Plugins':
     - 'Introduction': docs/plugins.md
+    - 'JavaScript-Based Plugins':
+      - 'datatable-js': docs/plugins/js-based/datatable-js.md
+      - 'pivot-table-js': docs/plugins/js-based/pivot-table-js.md
+      - 'pie-chart-js': docs/plugins/js-based/pie-chart-js.md
+      - 'tabulator-js': docs/plugins/js-based/tabulator-js.md
     - 'R-Based Plugins':
       - 'barplot-r': docs/plugins/r-based/barplot-r.md
       - 'boxplot-r': docs/plugins/r-based/boxplot-r.md
       - 'corrplot-r': docs/plugins/r-based/corrplot-r.md
       - 'density-plot-r': docs/plugins/r-based/density-plot-r.md
       - 'grouped-boxplot-r': docs/plugins/r-based/grouped-boxplot-r.md
-      - 'heatmap-r': docs/plugins/r-based/heatmap-r.md
+      # - 'heatmap-r': docs/plugins/r-based/heatmap-r.md
       - 'heatmap-d3-r': docs/plugins/r-based/heatmap-d3-r.md
       - 'lineplot-r': docs/plugins/r-based/lineplot-r.md
-      - 'lollipop-plot-r': docs/plugins/r-based/lollipop-plot-r.md
+      # - 'lollipop-plot-r': docs/plugins/r-based/lollipop-plot-r.md
       - 'rocket-plot-r': docs/plugins/r-based/rocket-plot-r.md
       - 'scatter-plot-r': docs/plugins/r-based/scatter-plot-r.md
       - 'stack-barplot-r': docs/plugins/r-based/stack-barplot-r.md
@@ -99,11 +104,6 @@ nav:
       - 'violin-plot-r': docs/plugins/r-based/violin-plot-r.md
     - 'Python-Based Plugins':
       - 'multiqc-py': docs/plugins/py-based/multiqc-py.md
-    - 'JavaScript-Based Plugins':
-      - 'datatable-js': docs/plugins/js-based/datatable-js.md
-      - 'pie-chart-js': docs/plugins/js-based/pie-chart-js.md
-      - 'pivot-table-js': docs/plugins/js-based/pivot-table-js.md
-      - 'tabulator-js': docs/plugins/js-based/tabulator-js.md
   - 'Examples': 
       - 'Introduction': docs/examples.md
   - 'FAQs': docs/faqs.md
