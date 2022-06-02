@@ -17,7 +17,7 @@ To better demonstrate the capabilities of BioVisReport, we provide an example ba
 
 ## Try it!
 
-Access the [http://example1.biovis.report](http://example1.biovis.report)
+Access the <a href="https://biovis-report-example1.3steps.cn" target="_blank">Online Example</a>
 
 ## Download the Report Source Files
 
