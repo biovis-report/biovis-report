@@ -126,4 +126,5 @@ biovis-report report -t ./example -p ./ --enable-plugin --theme biovis_report -m
 ```
 
 After building, you will get a series of html, data, css, and javascript files as follows.
+
 ![Report HTML](/assets/images/report_html.png)

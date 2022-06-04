@@ -34,7 +34,7 @@ plugins:
   - search
   - git-revision-date
 extra:
-  homepage: https://biovis-report.github.io
+  homepage: https://biovis.report
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/biovis-report
