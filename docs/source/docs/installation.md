@@ -2,7 +2,7 @@
 
     1. Therefore, the current version of BioVisReport does not support Windows because we cannot make all plugins work properly on Windows. We consider to support Windows in next version. We're very sorry for the inconvenience.
 
-    2. BioVis requires Python 3.7+ and a set of R/Python/JavaScript packages to be loaded in your environment in order for full functionality to work. For easier to install all the depedencies, we choose the miniconda (you can also use anaconda).
+    2. BioVisReport requires Python 3.7+ and a set of R/Python/JavaScript packages to be loaded in your environment in order for full functionality to work. For easier to install all the depedencies, we choose the miniconda (you can also use anaconda).
 
 ## Step 1: Install miniconda
 
